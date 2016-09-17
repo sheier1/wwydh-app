@@ -2,7 +2,7 @@
 
     include "../helpers/conn.php";
 
-    $q = $conn->prepare("SELECT * FROM locations") // change with where clause (select closest 4-10 locations)
+    $q = $conn->prepare("SELECT * FROM locations"); // change with where clause (select closest 4-10 locations)
     $q->execute();
 
     $data = $q->get_result();
