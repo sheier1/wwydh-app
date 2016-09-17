@@ -16,8 +16,8 @@
                     var lat = location.coords.latitude;
                     var lng = location.coords.longitude;
 
-                    var newLat = parseInt("<?php echo $row["latitude"] ?>");
-                    var newLng = parseInt("<?php echo $row["longitude"] ?>");
+                    var newLat = <?php echo $row["latitude"] ?>;
+                    var newLng = <?php echo $row["longitude"] ?>;
 
                     alert(newLat + ", " + newLng);
 
