@@ -17,7 +17,7 @@
                     var lng = location.coords.longitude;
 
                     var myLatLng = {lat: lat, lng: lng};
-                    var position = {lat: <?php echo $row["latitude"] ?>, lng: <?php echo $row["longitude"] ?>};
+                    var position = {lat: parseInt("<?php echo $row["latitude"] ?>"), lng: parseInt("<?php echo $row["longitude"] ?>")};
 
                     // Create a map object and specify the DOM element for display.
                     var map = new google.maps.Map(document.getElementById('map'), {
