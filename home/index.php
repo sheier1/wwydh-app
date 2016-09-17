@@ -1,5 +1,11 @@
 <?php
 
+    include "../helpers/conn.php";
+
+    $q = $conn->prepare("SELECT * FROM locations") // change with where clause (select closest 4-10 locations)
+    $q->execute();
+
+    $data = $q->get_result();
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,15 +22,20 @@
                     var map = new google.maps.Map(document.getElementById('map'), {
                       center: myLatLng,
                       scrollwheel: false,
-                      zoom: 10
+                      zoom: 13
                     });
 
-                    // Create a marker and set its position.
-                    var marker = new google.maps.Marker({
-                        map: map,
-                        position: myLatLng,
-                        title: "Hello World!"
-                    });
+                    <?php
+                        while ($row = $data->fetch_array(MYSQLI_ASSOC)) { ?>
+                            // Create a marker and set its position.
+                            var position = {lat: <?php echo $row["latitude"] ?>, lng: <?php echo $row["longitude"] ?>};
+                            var marker = new google.maps.Marker({
+                                map: map,
+                                position: position,
+                                title: "<?php echo $row["address"] ?>"
+                            });
+                        <?php }
+                    ?>
                 })
             }
 
