@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script>
+        <script type="text/javascript">
             function initMap() {
                 navigator.geolocation.getCurrentPosition(function(location) {
                     var lat = location.coords.latitude;
@@ -42,8 +42,8 @@
                 })
             }
 
-            </script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzAMBl8WEWkqExNw16kEk40gCOonhMUmw&callback=initMap" async defer></script>
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzAMBl8WEWkqExNw16kEk40gCOonhMUmw&callback=initMap" async defer></script>
     </head>
     <body>
         <div id="nav"></div>
