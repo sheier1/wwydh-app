@@ -28,7 +28,7 @@
     </head>
     <body>
         <div id="nav"></div>
-        <div id="map">
+        <div id="map" style="height: 500px">
 
         </div>
         <div id="explore"></div>
