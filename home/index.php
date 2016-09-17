@@ -6,9 +6,9 @@
     <head>
         <script>
               function initMap() {
+                var myLatLng = {lat: -25.363, lng: 131.044};
 
                 navigator.geolocation.getCurrentPosition(function(location) {
-                    var myLatLng = {lat, lng};
                     myLatLng.lat = location.coords.latitude;
                     myLatLng.lng = location.coords.longitude;
 
@@ -16,7 +16,7 @@
                     var map = new google.maps.Map(document.getElementById('map'), {
                       center: myLatLng,
                       scrollwheel: false,
-                      zoom: 10
+                      zoom: 10;
                     });
 
                     // Create a marker and set its position.
