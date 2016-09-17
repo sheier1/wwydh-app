@@ -5,8 +5,11 @@
     $q = $conn->prepare("SELECT * FROM locations"); // change with where clause (select closest 4-10 locations)
     $q->execute();
 
-    $row = $q->get_result()->fetch_array(MYSQLI_ASSOC)[0];
-    print_r($row);
+    $data = $q->get_result();
+
+    while($row = $data->fetch_array(MYSQLI_ASSOC)) {
+        echo $row["address"];
+    }
 ?>
 <!DOCTYPE html>
 <html>
