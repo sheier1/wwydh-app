@@ -6,7 +6,7 @@
     <head>
         <script>
               function initMap() {
-                var myLatLng = {lat: -25.363, lng: 131.044};
+                var myLatLng = {};
 
                 navigator.geolocation.getCurrentPosition(function(location) {
                     myLatLng.lat = location.coords.latitude;
