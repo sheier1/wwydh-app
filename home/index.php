@@ -22,6 +22,8 @@
                     var myLatLng = {lat: lat, lng: lng};
                     var position = {lat: newLat, lng: newLng};
 
+                    alert(position);
+
                     // Create a map object and specify the DOM element for display.
                     var map = new google.maps.Map(document.getElementById('map'), {
                       center: myLatLng,
