@@ -33,11 +33,11 @@
 
                     <?php
                         while ($row = $data->fetch_array(MYSQLI_ASSOC)) { ?>
-                            alert("test");
                             // Create a marker and set its position.
                             var lat = "<?php echo $row["latitude"] ?>";
                             var lng = "<?php echo $row["longitude"] ?>";
 
+                            alert(lat + ", " + lng);
                             var position = {lat: lat, lng: lng};
                             var marker = new google.maps.Marker({
                                 map: map,
