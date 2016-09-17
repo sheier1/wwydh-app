@@ -5,7 +5,7 @@
     $q = $conn->prepare("SELECT * FROM locations"); // change with where clause (select closest 4-10 locations)
     $q->execute();
 
-    $data = $q->get_result();
+    $row = $q->get_result()->fetch_array(MYSQLI_ASOC);
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,6 +17,7 @@
                     var lng = location.coords.longitude;
 
                     var myLatLng = {lat: lat, lng: lng};
+                    var position = {lat: "<?php echo $row["latitude"] ?>", lng: "<?php echo $row["longitude"] ?>"};
 
                     // Create a map object and specify the DOM element for display.
                     var map = new google.maps.Map(document.getElementById('map'), {
@@ -27,7 +28,7 @@
 
                     var marker = new google.maps.Marker({
                         map: map,
-                        position: myLatLng,
+                        position: position,
                         title: "This is you"
                     });
                 })
