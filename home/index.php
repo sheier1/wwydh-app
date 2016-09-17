@@ -5,28 +5,28 @@
 <html>
     <head>
         <script>
-              function initMap() {
-                var myLatLng = {lat: -25.363, lng: 131.044};
-
+            function initMap() {
                 navigator.geolocation.getCurrentPosition(function(location) {
-                    myLatLng.lat = location.coords.latitude;
-                    myLatLng.lng = location.coords.longitude;
+                    var lat = location.coords.latitude;
+                    var lng = location.coords.longitude;
+
+                    var myLatLng = {lat: lat, lng: lng};
 
                     // Create a map object and specify the DOM element for display.
                     var map = new google.maps.Map(document.getElementById('map'), {
                       center: myLatLng,
                       scrollwheel: false,
-                      zoom: 10;
+                      zoom: 10
                     });
 
                     // Create a marker and set its position.
                     var marker = new google.maps.Marker({
-                      map: map,
-                      position: myLatLng,
-                      title: 'Hello World!'
+                        map: map,
+                        position: myLatLng,
+                        title: "Hello World!"
                     });
                 })
-              }
+            }
 
             </script>
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzAMBl8WEWkqExNw16kEk40gCOonhMUmw&callback=initMap" async defer></script>
