@@ -35,7 +35,12 @@
                       zoom: 11
                     });
 
-                    var marker = new google.maps.Marker({
+                    new google.maps.Marker({
+                        map: map,
+                        position: myLatLng
+                    });
+
+                    new google.maps.Marker({
                         map: map,
                         position: position
                     });
