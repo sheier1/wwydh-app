@@ -19,6 +19,8 @@
                     var newLat = parseInt("<?php echo $row["latitude"] ?>");
                     var newLng = parseInt("<?php echo $row["longitude"] ?>");
 
+                    alert(newLat + ", " + newLng);
+
                     var myLatLng = {lat: lat, lng: lng};
                     var position = {lat: newLat, lng: newLng};
 
