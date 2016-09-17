@@ -6,6 +6,7 @@
     $q->execute();
 
     $row = $q->get_result()->fetch_array(MYSQLI_ASOC)[0];
+    print_r($row);
 ?>
 <!DOCTYPE html>
 <html>
