@@ -5,7 +5,7 @@
     $q = $conn->prepare("SELECT * FROM locations"); // change with where clause (select closest 4-10 locations)
     $q->execute();
 
-    $row = $q->get_result()->fetch_array(MYSQLI_ASOC);
+    $row = $q->get_result()->fetch_array(MYSQLI_ASOC)[0];
 ?>
 <!DOCTYPE html>
 <html>
