@@ -12,7 +12,7 @@
                 var map = new google.maps.Map(document.getElementById('map'), {
                   center: myLatLng,
                   scrollwheel: false,
-                  zoom: 4
+                  zoom: 20
                 });
 
                 // Create a marker and set its position.
