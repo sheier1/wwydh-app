@@ -22,7 +22,13 @@
                     var map = new google.maps.Map(document.getElementById('map'), {
                       center: myLatLng,
                       scrollwheel: false,
-                      zoom: 13
+                      zoom: 10
+                    });
+
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: myLatLng,
+                        title: "<?php echo $row["address"] ?>"
                     });
 
                     <?php
