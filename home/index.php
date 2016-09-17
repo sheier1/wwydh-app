@@ -28,24 +28,8 @@
                     var marker = new google.maps.Marker({
                         map: map,
                         position: myLatLng,
-                        title: "<?php echo $row["address"] ?>"
+                        title: "This is you"
                     });
-
-                    <?php
-                        while ($row = $data->fetch_array(MYSQLI_ASSOC)) { ?>
-                            // Create a marker and set its position.
-                            var lat = "<?php echo $row["latitude"] ?>";
-                            var lng = "<?php echo $row["longitude"] ?>";
-
-                            alert(lat + ", " + lng);
-                            var position = {lat: lat, lng: lng};
-                            var marker = new google.maps.Marker({
-                                map: map,
-                                position: position,
-                                title: "<?php echo $row["address"] ?>"
-                            });
-                        <?php }
-                    ?>
                 })
             }
 
