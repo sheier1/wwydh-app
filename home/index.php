@@ -45,6 +45,28 @@
             }
 
         </script>
+        <style type="text/css">
+            .location_image {
+                height: 100px;
+                width: 100px;
+                background-position: center;
+                background-size: cover;
+                float: left;
+            }
+
+            .location {
+                width: 100%;
+                clear: both;
+                margin-bottom: 10px;
+                padding-bottom: 10px;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+                overflow: hidden;
+            }
+
+            .location:last-child {
+                border-bottom-width: 0px;
+            }
+        </style>
     </head>
     <body>
         <div id="nav">
@@ -61,7 +83,7 @@
                         <?php if ($l["ideas"] > 0) { ?>
                             <div class="ideas_count"><?php echo $l["ideas"] ?></div>
                         <?php } ?>
-                        <div class="location_image"></div>
+                        <div class="location_image" style="background-image: url(../helpers/location_images/<?php if (isset($l['image'])) echo $l['image']; else echo "pin.png";?> );"></div>
                         <div class="address"><?php echo $l["mailing_address"] ?></div>
                         <?php if (isset($l["features"])) { ?>
                             <div class="features">
