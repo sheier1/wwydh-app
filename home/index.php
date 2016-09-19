@@ -3,13 +3,16 @@
     include "../helpers/conn.php";
 
     // BACKEND:0 change location select query to count ideas and grab features for each location
-    $q = $conn->prepare("SELECT l.*, COUNT(i.id) as ideas FROM locations l LEFT JOIN ideas i ON i.location_id = l.id GROUP BY l.id"); // pulls all locations right now, do we want to keep this?
+    $q = $conn->prepare("SELECT l.*, COUNT(DISTINCT i.id) AS ideas, GROUP_CONCAT(DISTINCT f.feature SEPARATOR '[-]') AS features FROM locations l LEFT JOIN ideas i ON i.location_id = l.id LEFT JOIN location_features f ON f.location_id = l.id GROUP BY l.id LIMIT 6");
     $q->execute();
 
     $data = $q->get_result();
     $locations = [];
 
-    while ($row = $data->fetch_array(MYSQLI_ASSOC)) array_push($locations, $row);
+    while ($row = $data->fetch_array(MYSQLI_ASSOC)) {
+        if (isset($row["features"])) $row["features"] = explode("[-]", $row["features"]);
+        array_push($locations, $row);
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -65,8 +68,8 @@
                         <div class="features">
                             <span>Features:</span>
                                 <ul>
-                                    <?php foreach ($locations["features"] as $f) { ?>
-
+                                    <?php foreach ($l["features"] as $f) { ?>
+                                        <li><?php echo $f ?></li>
                                     <?php } ?>
                                 </ul>
                         </div>
