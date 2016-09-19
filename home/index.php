@@ -22,29 +22,22 @@
             // FRONTEND:0 implement a way to sort locations array by closest.
 
             function initMap() {
-                navigator.geolocation.getCurrentPosition(function(location) {
-                    var lat = location.coords.latitude;
-                    var lng = location.coords.longitude;
+                // Create a map object and specify the DOM element for display.
+                var map = new google.maps.Map(document.getElementById('map'), {
+                  center: {lat: parseFloat(locations[0].latitude), lng: parseFloat(locations[0].longitude)},
+                  scrollwheel: false,
+                  zoom: 16
+                });
 
-                    var myLatLng = {lat: lat, lng: lng};
-
-                    // Create a map object and specify the DOM element for display.
-                    var map = new google.maps.Map(document.getElementById('map'), {
-                      center: {lat: parseFloat(locations[0].latitude), lng: parseFloat(locations[0].longitude)},
-                      scrollwheel: false,
-                      zoom: 16
+                $(locations).each(function() {
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: {lat: parseFloat(this.latitude), lng: parseFloat(this.longitude)},
+                        address: this.mailing_address
                     });
 
-                    $(locations).each(function() {
-                        var marker = new google.maps.Marker({
-                            map: map,
-                            position: {lat: parseFloat(this.latitude), lng: parseFloat(this.longitude)},
-                            address: this.mailing_address
-                        });
-
-                        marker.addListener("click", function() {
-                            alert(this.address); // FRONTEND:10 change the map marker click listener to trigger location popup
-                        })
+                    marker.addListener("click", function() {
+                        alert(this.address); // FRONTEND:10 change the map marker click listener to trigger location popup
                     })
                 })
             }
