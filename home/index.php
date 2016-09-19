@@ -2,8 +2,8 @@
 
     include "../helpers/conn.php";
 
-    // BACKEND:0 change location select query to count ideas and grab features for each location
-    $q = $conn->prepare("SELECT l.*, COUNT(DISTINCT i.id) AS ideas, GROUP_CONCAT(DISTINCT f.feature SEPARATOR '[-]') AS features FROM locations l LEFT JOIN ideas i ON i.location_id = l.id LEFT JOIN location_features f ON f.location_id = l.id GROUP BY l.id LIMIT 6");
+    // BACKEND:0 change homepage location query to ORDER BY RAND() LIMIT 3
+    $q = $conn->prepare("SELECT l.*, COUNT(DISTINCT i.id) AS ideas, GROUP_CONCAT(DISTINCT f.feature SEPARATOR '[-]') AS features FROM locations l LEFT JOIN ideas i ON i.location_id = l.id LEFT JOIN location_features f ON f.location_id = l.id GROUP BY l.id ORDER BY RAND() LIMIT 3");
     $q->execute();
 
     $data = $q->get_result();
@@ -22,14 +22,12 @@
             // convert location data from php to javascript using JSON
             var locations = jQuery.parseJSON('<?php echo str_replace("'", "\'", json_encode($locations)) ?>');
 
-            // FRONTEND:0 implement a way to sort locations array by closest.
-
             function initMap() {
                 // Create a map object and specify the DOM element for display.
                 var map = new google.maps.Map(document.getElementById('map'), {
                   center: {lat: parseFloat(locations[0].latitude), lng: parseFloat(locations[0].longitude)},
                   scrollwheel: false,
-                  zoom: 16
+                  zoom: 14
                 });
 
                 $(locations).each(function() {
