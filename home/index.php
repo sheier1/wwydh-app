@@ -3,7 +3,7 @@
     include "../helpers/conn.php";
 
     // BACKEND:0 change homepage location query to ORDER BY RAND() LIMIT 3
-    $q = $conn->prepare("SELECT l.*, COUNT(DISTINCT i.id) AS ideas, GROUP_CONCAT(DISTINCT f.feature SEPARATOR '[-]') AS features FROM locations l LEFT JOIN ideas i ON i.location_id = l.id LEFT JOIN location_features f ON f.location_id = l.id GROUP BY l.id ORDER BY RAND() LIMIT 3");
+    $q = $conn->prepare("SELECT l.*, COUNT(DISTINCT i.id) AS ideas, GROUP_CONCAT(DISTINCT f.feature SEPARATOR '[-]') AS features FROM locations l LEFT JOIN ideas i ON i.location_id = l.id LEFT JOIN location_features f ON f.location_id = l.id GROUP BY l.id LIMIT 3");
     $q->execute();
 
     $data = $q->get_result();
@@ -17,6 +17,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzAMBl8WEWkqExNw16kEk40gCOonhMUmw&callback=initMap" async defer></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script type="text/javascript">
             // convert location data from php to javascript using JSON
@@ -44,7 +45,6 @@
             }
 
         </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzAMBl8WEWkqExNw16kEk40gCOonhMUmw&callback=initMap" async defer></script>
     </head>
     <body>
         <div id="nav">
@@ -54,7 +54,7 @@
         </div>
         <div id="map" style="height: 500px"></div>
         <div id="explore">
-            <div>
+            <div id="locations">
                 <?php
                 foreach($locations as $l) { ?>
                     <div class="location">
@@ -63,17 +63,22 @@
                         <?php } ?>
                         <div class="location_image"></div>
                         <div class="address"><?php echo $l["mailing_address"] ?></div>
-                        <div class="features">
-                            <span>Features:</span>
-                                <ul>
-                                    <?php foreach ($l["features"] as $f) { ?>
-                                        <li><?php echo $f ?></li>
-                                    <?php } ?>
-                                </ul>
-                        </div>
+                        <?php if (isset($l["features"])) { ?>
+                            <div class="features">
+                                <span>Features:</span>
+                                    <ul>
+                                        <?php foreach ($l["features"] as $f) { ?>
+                                            <li><?php echo $f ?></li>
+                                        <?php } ?>
+                                    </ul>
+                            </div>
+                        <?php } ?>
                     </div>
                 <?php }
                 ?>
+            </div>
+            <div id="projects">
+
             </div>
         </div>
         <div id="about"></div>
