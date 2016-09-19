@@ -2,8 +2,8 @@
 
     include "../helpers/conn.php";
 
-    // TODO:0 change location select query to count ideas and grab features for each location
-    $q = $conn->prepare("SELECT l.* FROM locations l "); // pulls all locations right now, do we want to keep this?
+    // BACKEND:0 change location select query to count ideas and grab features for each location
+    $q = $conn->prepare("SELECT l.*, COUNT(i.id) as ideas FROM locations l LEFT JOIN ideas i ON i.location_id = l.id GROUP BY l.id"); // pulls all locations right now, do we want to keep this?
     $q->execute();
 
     $data = $q->get_result();
@@ -19,7 +19,7 @@
             // convert location data from php to javascript using JSON
             var locations = jQuery.parseJSON('<?php echo str_replace("'", "\'", json_encode($locations)) ?>');
 
-            // TODO:10 implement a way to sort locations array by closest. Thinking a load file that grabs current location (or doesn't) and then calls this page with $_GET vars?
+            // FRONTEND:0 implement a way to sort locations array by closest.
 
             function initMap() {
                 navigator.geolocation.getCurrentPosition(function(location) {
@@ -32,7 +32,7 @@
                     var map = new google.maps.Map(document.getElementById('map'), {
                       center: {lat: parseFloat(locations[0].latitude), lng: parseFloat(locations[0].longitude)},
                       scrollwheel: false,
-                      zoom: 13
+                      zoom: 16
                     });
 
                     $(locations).each(function() {
@@ -43,7 +43,7 @@
                         });
 
                         marker.addListener("click", function() {
-                            alert(this.address);
+                            alert(this.address); // FRONTEND:10 change the map marker click listener to trigger location popup
                         })
                     })
                 })
@@ -64,6 +64,9 @@
                 <?php
                 foreach($locations as $l) { ?>
                     <div class="location">
+                        <?php if ($l["ideas"] > 0) { ?>
+                            <div class="ideas_count"><?php echo $l["ideas"] ?></div>
+                        <?php } ?>
                         <div class="location_image"></div>
                         <div class="address"><?php echo $l["mailing_address"] ?></div>
                         <div class="features">
