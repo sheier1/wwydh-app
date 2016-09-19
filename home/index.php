@@ -65,7 +65,7 @@
                 foreach($locations as $l) { ?>
                     <div class="location">
                         <div class="location_image"></div>
-                        <div class="address"><?php echo $l["address"] ?></div>
+                        <div class="address"><?php echo $l["mailing_address"] ?></div>
                         <div class="features">
                             <span>Features:</span>
                                 <ul>
