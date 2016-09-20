@@ -109,9 +109,9 @@
                                     </ul>
                             </div>
                         <?php } ?>
-                        <div class="btn">I have an idea</div>
-                        <?php if ($l["ideas"] > 0) { ?> <div class="btn">See other ideas here</div> <?php } ?>
-                        <div class="btn">View full location</div>
+                        <div class="btn"><a href="../newidea?location=<?php echo $l["id"] ?>">I have an idea</a></div>
+                        <?php if ($l["ideas"] > 0) { ?> <div class="btn"><a href="../ideas?location=<?php echo $l["id"] ?>">See other ideas here</a></div> <?php } ?>
+                        <div class="btn"><a href="../locattion?id=<?php echo $l["id"] ?>">View full location</a></div>
                     </div>
                 <?php }
                 ?>
