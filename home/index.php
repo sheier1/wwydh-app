@@ -13,6 +13,16 @@
         if (isset($row["features"])) $row["features"] = explode("[-]", $row["features"]);
         array_push($locations, $row);
     }
+
+    $q = $conn->prepare("SELECT p.*, u.name AS leader, l.mailing_address AS address, l.image AS image FROM projects p LEFT JOIN users u ON p.leader_id = u.id LEFT JOIN ideas i ON p.idea_id = i.id LEFT JOIN locations l ON i.location_id = l.id");
+    $q->execute();
+
+    $data = $q->get_result();
+    $projects = [];
+
+    while ($row = $data->fetch_array(MYSQLI_ASSOC)) {
+        array_push($projects, $row);
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,8 +55,12 @@
             }
 
         </script>
+
+        <?php
+            // FRONTEND: remove this garbage style tag and externalize this stylesheet. This is just so I could see what I was doing
+        ?>
         <style type="text/css">
-            .location_image {
+            .location_image, .project_image {
                 height: 100px;
                 width: 100px;
                 background-position: center;
@@ -83,7 +97,7 @@
                         <?php if ($l["ideas"] > 0) { ?>
                             <div class="ideas_count"><?php echo $l["ideas"] ?></div>
                         <?php } ?>
-                        <div class="location_image" style="background-image: url(../helpers/location_images/<?php if (isset($l['image'])) echo $l['image']; else echo "pin.png";?> );"></div>
+                        <div class="location_image" style="background-image: url(../helpers/location_images/<?php if (isset($l['image'])) echo $l['image']; else echo "pin.png";?>);"></div>
                         <div class="address"><?php echo $l["mailing_address"] ?></div>
                         <?php if (isset($l["features"])) { ?>
                             <div class="features">
@@ -100,7 +114,15 @@
                 ?>
             </div>
             <div id="projects">
-
+                <?php
+                foreach ($projects as $p) { ?>
+                    <div class="project">
+                        <div class="project_image" style="background-image: url(../helpers/location_images/<?php if (isset($p['image'])) echo $p['image']; else echo "pin.png";?>);"></div>
+                        <div class="project_leader"><?php echo $p["leader"] ?></div>
+                        <div class="address"><?php echo $p["address"] ?></div>
+                        <div class="project_status">Status: <?php echo $p["completed"] == 0 ? "unfinished" : "finished" ?></div>
+                    </div>
+                <?php } ?>
             </div>
         </div>
         <div id="about"></div>
