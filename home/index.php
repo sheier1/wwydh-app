@@ -140,7 +140,7 @@
                 <?php
                 foreach ($projects as $p) { ?>
                     <div class="project">
-                        <div class="project_image" style="background-image: url(../helpers/location_images/<?php if (isset($p['image'])) echo $p['image']; else echo "pin.png";?>);"></div>
+                        <div class="project_image" style="background-image: url(../helpers/location_images/<?php if (isset($p['image'])) echo $p['image']; else echo "no_image.png";?>);"></div>
                         <div class="project_leader"><?php echo $p["leader"] ?></div>
                         <div class="address"><?php echo $p["address"] ?></div>
                         <div class="project_status">Status: <?php echo $p["completed"] == 0 ? "unfinished" : "finished" ?></div>
@@ -153,7 +153,7 @@
         <div id="contact"></div>
         <div id="footer">
             <div class="grid-inner">
-                &copy; <?php echo date("Y") ?>
+                &copy; Copyright WWYDH <?php echo date("Y") ?>
             </div>
         </div>
     </body>
