@@ -1,5 +1,7 @@
 <?php
 
+    session_start();
+
     include "../helpers/conn.php";
 
     // BACKEND:0 change homepage location query to ORDER BY RAND() LIMIT 3
@@ -87,8 +89,9 @@
     <body>
         <div id="nav">
             <div class="nav-inner width">
-                <div id="logo"></div>
-                <div id="logo_name">What Would You Do Here?</div>
+                <a href="../home">
+                    <div id="logo"></div>
+                    <div id="logo_name">What Would You Do Here?</div>
                 <div id="user_nav" class="nav">
                     <ul>
                         <a href="#"><li>Log in</li></a>
@@ -97,7 +100,7 @@
                 </div>
                 <div id="main_nav" class="nav">
                     <ul>
-                        <a href="locations.php"><li>Locations</li></a>
+                        <a href="../locations"><li>Locations</li></a>
                         <a href="#"><li>Ideas</li></a>
                         <a href="#"><li>Projects</li></a>
                         <a href="#"><li>Contact</li></a>

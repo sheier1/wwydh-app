@@ -1,0 +1,57 @@
+.location {
+    width: 25%;
+    overflow: hidden;
+    padding: 5px;
+    box-sizing: border-box;
+    position relative;
+    float: left;
+    transform: scale(1);
+    transition: all 0.25s ease;
+}
+
+.location:hover {
+    transform: scale(1.01);
+    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.5);
+}
+
+.location .grid-item {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.location_image {
+    height: 200px;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    border-radius: 2px;
+}
+
+.location .location_desc {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.25);
+    color: white;
+    padding: 5px 5px;
+    box-sizing: border-box;
+}
+
+.location .location_desc .address {
+    font-size: 14px;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.location .location_desc .features {
+    font-size: 12px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    /* color: #418040; */
+}
