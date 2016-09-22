@@ -27,6 +27,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,600i,700" rel="stylesheet">
+        <link href="header_footer.css" type="text/css" rel="stylesheet" />
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzAMBl8WEWkqExNw16kEk40gCOonhMUmw&callback=initMap" async defer></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script type="text/javascript">
@@ -84,9 +86,24 @@
     </head>
     <body>
         <div id="nav">
-            <div id="logo"></div>
-            <div id="main_nav"></div>
-            <div id="user_nav"></div>
+            <div class="nav-inner width">
+                <div id="logo"></div>
+                <div id="logo_name">What Would You Do Here?</div>
+                <div id="user_nav" class="nav">
+                    <ul>
+                        <a href="#"><li>Log in</li></a>
+                        <a href="#"><li>Sign up</li></a>
+                    </ul>
+                </div>
+                <div id="main_nav" class="nav">
+                    <ul>
+                        <a href="#"><li>Locations</li></a>
+                        <a href="#"><li>Ideas</li></a>
+                        <a href="#"><li>Projects</li></a>
+                        <a href="#"><li>Contact</li></a>
+                    </ul>
+                </div>
+            </div>
         </div>
         <div id="map" style="height: 500px"></div>
         <div id="explore">
@@ -131,6 +148,10 @@
         <div id="about"></div>
         <div id="how"></div>
         <div id="contact"></div>
-        <div id="footer"></div>
+        <div id="footer">
+            <div class="grid-inner">
+                &copy; <?php echo date("Y") ?>
+            </div>
+        </div>
     </body>
 </html>
