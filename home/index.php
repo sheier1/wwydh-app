@@ -28,7 +28,7 @@
 <html>
     <head>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,600i,700" rel="stylesheet">
-        <link href="header_footer.css" type="text/css" rel="stylesheet" />
+        <link href="../helpers/header_footer.css" type="text/css" rel="stylesheet" />
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzAMBl8WEWkqExNw16kEk40gCOonhMUmw&callback=initMap" async defer></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script type="text/javascript">
