@@ -40,15 +40,21 @@
             function initMap() {
                 // Create a map object and specify the DOM element for display.
                 var map = new google.maps.Map(document.getElementById('map'), {
-                  center: {lat: parseFloat(locations[0].latitude), lng: parseFloat(locations[0].longitude)},
-                  scrollwheel: false,
-                  zoom: 14
+                    animation: google.maps.Animation.DROP,
+                    center: {lat: parseFloat(locations[0].latitude), lng: parseFloat(locations[0].longitude)},
+                    scrollwheel: false,
+                    zoom: 14
                 });
 
                 $(locations).each(function() {
                     var marker = new google.maps.Marker({
                         map: map,
                         position: {lat: parseFloat(this.latitude), lng: parseFloat(this.longitude)},
+                        icon: {
+                            size: new google.maps.Size(35, 35),
+                            scaledSize: new google.maps.Size(35, 35),
+                            url: "../images/marker.svg"
+                        },
                         address: this.mailing_address
                     });
 
