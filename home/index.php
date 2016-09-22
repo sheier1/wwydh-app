@@ -97,7 +97,7 @@
                 </div>
                 <div id="main_nav" class="nav">
                     <ul>
-                        <a href="#"><li>Locations</li></a>
+                        <a href="locations.php"><li>Locations</li></a>
                         <a href="#"><li>Ideas</li></a>
                         <a href="#"><li>Projects</li></a>
                         <a href="#"><li>Contact</li></a>
@@ -128,7 +128,7 @@
                         <?php } ?>
                         <div class="btn"><a href="../newidea?location=<?php echo $l["id"] ?>">I have an idea</a></div>
                         <?php if ($l["ideas"] > 0) { ?> <div class="btn"><a href="../ideas?location=<?php echo $l["id"] ?>">See other ideas here</a></div> <?php } ?>
-                        <div class="btn"><a href="../locattion?id=<?php echo $l["id"] ?>">View full location</a></div>
+                        <div class="btn"><a href="propertyInfo.php?id=<?php echo $l["id"] ?>">View full location</a></div>
                     </div>
                 <?php }
                 ?>
