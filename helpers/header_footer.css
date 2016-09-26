@@ -55,10 +55,21 @@ body {
     text-decoration: none;
     transition: color 0.15s ease;
     font-size: 14px;
+    position: relative;
 }
 
 .nav a:hover, .nav a.active {
     color: #418040;
+}
+
+.nav a.active:after {
+    content: " ";
+    background: #418040;
+    height: 2px;
+    width: 100%;
+    left: 0;
+    position: absolute;
+    bottom: -3px;
 }
 
 .nav ul {
@@ -68,11 +79,7 @@ body {
 .nav li {
     list-style-type: none;
     display: inline-block;
-    margin-right: 8px;
-}
-
-.nav a:last-child li {
-    margin-right: 0px;
+    margin: 0px 4px;
 }
 
 #user_nav {
