@@ -31,6 +31,7 @@
     <head>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,600i,700" rel="stylesheet">
         <link href="../helpers/header_footer.css" type="text/css" rel="stylesheet" />
+        <link href="styles.css" type="text/css" rel="stylesheet" />
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzAMBl8WEWkqExNw16kEk40gCOonhMUmw&callback=initMap" async defer></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script type="text/javascript">
@@ -60,82 +61,6 @@
             }
 
         </script>
-
-        <?php
-            // FRONTEND: remove this garbage style tag and externalize this stylesheet. This is just so I could see what I was doing
-        ?>
-        <style type="text/css">
-            .location_image, .project_image {
-                height: 100px;
-                width: 100px;
-                background-position: center;
-                background-size: cover;
-                float: left;
-            }
-
-            .location {
-                width: 100%;
-                clear: both;
-                margin-bottom: 10px;
-                padding-bottom: 10px;
-                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-                overflow: hidden;
-            }
-
-            .location:last-child {
-                border-bottom-width: 0px;
-            }
-
-            #mapContainer {
-                height: 575px;
-                position:relative;
-            }
-
-            #map {
-                height: 500px;
-            }
-
-            #welcome{
-                height: 75px;
-                background-color: #418040;
-                z-index: 1;
-                opacity: 1;
-                left: 0;
-                right: 0;
-                bottom: 0;
-            }
-
-            h1 {
-                color: white;
-                font-family: "Open Sans";
-                font-size: large;
-                text-decoration: underline;
-                float: left;
-                vertical-align: middle;
-                position: relative;
-                top: 10px;
-                left: 20px;
-            }
-
-            #locationButton {
-                background-color: white;
-                color: #418040;
-                border: 2px solid #418040;
-                font-family: "Open Sans";
-                float: right;
-                font-size: 22px;
-                border-radius: 8px;
-                padding: 8px 4px;
-                position: relative;
-                top: 13px;
-                left: -30px;
-            }
-
-            #map{
-                height: 500px;
-                position: relative;
-            }
-        </style>
     </head>
     <body>
         <div id="nav">
@@ -162,8 +87,10 @@
         <div id="mapContainer">
             <div id="map"></div>
             <div id="welcome">
-                <h1>See How it Works!</h1>
-                <div id="locationButton">Submit Location</div>
+                <div class="width">
+                    <h1>See How it Works!</h1>
+                    <div id="locationButton">Submit Location</div>
+                </div>
             </div>
         </div>
         <div id="explore">

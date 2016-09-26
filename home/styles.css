@@ -1,0 +1,68 @@
+.location_image, .project_image {
+    height: 100px;
+    width: 100px;
+    background-position: center;
+    background-size: cover;
+    float: left;
+}
+
+.location {
+    width: 100%;
+    clear: both;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.location:last-child {
+    border-bottom-width: 0px;
+}
+
+#mapContainer {
+    height: 575px;
+    position:relative;
+}
+
+#map {
+    height: 500px;
+}
+
+#welcome {
+    padding: 12px 0;
+    overflow: hidden;
+    background-color: #418040;
+    z-index: 1;
+    opacity: 1;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+#welcome h1 {
+    color: white;
+    font-family: "Open Sans";
+    font-size: 18px;
+    text-decoration: underline;
+    float: left;
+    position: relative;
+    font-weight: 400;
+}
+
+#locationButton {
+    background-color: white;
+    color: #418040;
+    border: 2px solid #418040;
+    font-family: "Open Sans";
+    float: right;
+    font-size: 17px;
+    border-radius: 8px;
+    padding: 10px;
+    position: relative;
+    text-transform: uppercase
+}
+
+#map {
+    height: 500px;
+    position: relative;
+}
