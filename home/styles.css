@@ -66,3 +66,36 @@
     height: 500px;
     position: relative;
 }
+
+#about {
+    padding: 100px 0px;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+    background: #418040; /* Old browsers */
+    background: -moz-linear-gradient(top, #418040 0%, #376837 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #418040 0%,#376837 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #418040 0%,#376837 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+#about .small-content {
+    max-width: 800px;
+    margin: auto;
+}
+
+#about p {
+    font-style: italic;
+    font-weight: 600;
+    font-size: 22px;
+    margin-top: 35px;
+}
+
+.arrow-down {
+    margin-left:1222px;
+    width: 1px;
+    height: 5px;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 50px solid #418040;
+}

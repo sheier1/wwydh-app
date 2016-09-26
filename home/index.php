@@ -132,7 +132,16 @@
                 <?php } ?>
             </div>
         </div>
-        <div id="about"></div>
+        <div id="about">
+            <div class="grid-inner width">
+                <h1>ABOUT</h1>
+                <div class="small-content">
+                    WWYDH facilitates economic and social revitalization in Baltimore by combining the existing vacant and underutilized built infrastructure with the creative imagination and skills of people throughout the city. We begin by asking the simplest question:
+                </div>
+
+                <p>"What would you do here?"</p>
+            </div>
+        </div>
         <div id="how"></div>
         <div id="contact"></div>
         <div id="footer">
