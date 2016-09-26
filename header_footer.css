@@ -1,0 +1,108 @@
+.width {
+    max-width: 1400px;
+    margin: auto;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: "Open Sans", sans-serif;
+}
+
+#nav {
+    background: white;
+    positon: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    padding: 5px 0;
+}
+
+.nav-inner {
+    overflow: hidden;
+}
+
+
+#nav #logo {
+    background-image: url(../images/logo.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 40px;
+    width: 40px;
+    float: left;
+    margin-top: 5px;
+}
+
+#logo_name {
+    color: #939393;
+    font-weight: 700;
+    margin: 16px 0px 0px 10px;
+    width: 250px;
+    float: left;
+}
+
+.nav {
+    width: 400px;
+    text-align: center;
+    margin: auto;
+}
+
+.nav a {
+    color: #939393;
+    text-decoration: none;
+    transition: color 0.15s ease;
+    font-size: 14px;
+}
+
+.nav a:hover {
+    color: #418040;
+}
+
+.nav ul {
+    padding: 0;
+}
+
+.nav li {
+    list-style-type: none;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.nav a:last-child li {
+    margin-right: 0px;
+}
+.box{
+width: 2543px;
+height:500px;
+}
+.green{
+background:#418040;
+}
+.arrow-down {
+  margin-left:1222px;
+  width: 1px;
+  height: 5px;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-top: 50px solid #418040;
+}
+#user_nav {
+    width: 200px;
+    float: right;
+    text-align: right;
+}
+
+#footer {
+    background-color: #2d2d2d;
+    text-align: center;
+    color: white;
+    clear: both;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+#footer .grid-inner {
+    max-width: 1400px;
+    margin: 60px auto;
+}
