@@ -68,6 +68,7 @@
 }
 
 #about {
+    position: relative;
     padding: 100px 0px;
     width: 100%;
     text-align: center;
@@ -91,11 +92,15 @@
     margin-top: 35px;
 }
 
-.arrow-down {
-    margin-left:1222px;
-    width: 1px;
-    height: 5px;
-    border-left: 50px solid transparent;
-    border-right: 50px solid transparent;
-    border-top: 50px solid #418040;
+#about:after {
+    content: " ";
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid #376837;
+    position: absolute;
+    bottom: -20px;
+    left: 0; right: 0;
+    margin: auto;
 }
