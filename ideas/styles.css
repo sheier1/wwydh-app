@@ -30,9 +30,28 @@
     overflow: hidden;
 }
 
+.idea .vote {
+    float: left;
+    margin-right: 15px;
+}
+
+.idea .vote i {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.idea .vote .upvote i {
+    color: #418040;
+}
+
+.idea .vote .downvote i {
+    color: #939393;
+}
+
+
 .idea_image {
     height: 200px;
-    width: 250px;
+    width: 300px;
     background-position: center;
     background-size: cover;
     border-radius: 2px;

@@ -34,7 +34,7 @@
 		<link href="../helpers/splash.css" type="text/css" rel="stylesheet" />
 		<link href="styles.css" type="text/css" rel="stylesheet" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-
+		<script src="https://use.fontawesome.com/42543b711d.js"></script>
 	</head>
 	<body>
 		<div class="width">
@@ -77,6 +77,14 @@
 
 				<div class="idea">
 					<div class="grid-item width">
+						<div class="vote">
+							<div class="upvote">
+								<i class="fa fa-caret-up" aria-hidden="true"></i>
+							</div>
+							<div class="downvote">
+								<i class="fa fa-caret-down" aria-hidden="true"></i>
+							</div>
+						</div>
 						<div class="idea_image" style="background-image: url(../helpers/location_images/<?php if (isset($row['image'])) echo $row['image']; else echo "no_image.jpg";?>);"></div>
 						<div class="idea_desc">
 							<div class="title"><?php echo $row["title"] ?></div>
