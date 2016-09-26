@@ -50,11 +50,6 @@
                     var marker = new google.maps.Marker({
                         map: map,
                         position: {lat: parseFloat(this.latitude), lng: parseFloat(this.longitude)},
-                        icon: {
-                            size: new google.maps.Size(35, 35),
-                            scaledSize: new google.maps.Size(35, 35),
-                            url: "../images/marker.svg"
-                        },
                         address: this.mailing_address
                     });
 
@@ -107,9 +102,9 @@
                 <div id="main_nav" class="nav">
                     <ul>
                         <a href="../locations"><li>Locations</li></a>
-                        <a href="#"><li>Ideas</li></a>
-                        <a href="#"><li>Projects</li></a>
-                        <a href="#"><li>Contact</li></a>
+                        <a href="../ideas"><li>Ideas</li></a>
+                        <a href="../projects"><li>Projects</li></a>
+                        <a href="../home?contact"><li>Contact</li></a>
                     </ul>
                 </div>
             </div>
