@@ -147,6 +147,7 @@ echo "<table width=1>";
 	<head>
 		<title>All Locations</title>
 		<link href="../helpers/header_footer.css" type="text/css" rel="stylesheet" />
+		<link href="../helpers/splash.css" type="text/css" rel="stylesheet" />
 		<link href="styles.css" type="text/css" rel="stylesheet" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
