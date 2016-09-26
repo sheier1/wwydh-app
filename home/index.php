@@ -86,17 +86,20 @@
                 border-bottom-width: 0px;
             }
 
-            #mapContainer{
-                height:500px;
+            #mapContainer {
+                height: 575px;
                 position:relative;
+            }
+
+            #map {
+                height: 500px;
             }
 
             #welcome{
                 height: 75px;
                 background-color: #418040;
                 z-index: 1;
-                opacity: 0.9;
-                position: absolute;
+                opacity: 1;
                 left: 0;
                 right: 0;
                 bottom: 0;
