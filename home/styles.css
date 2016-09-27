@@ -104,3 +104,19 @@
     left: 0; right: 0;
     margin: auto;
 }
+
+#how {
+    padding: 100px 0px;
+    width: 100%;
+}
+
+#how th {
+    width: 33.3%;
+    text-align: center;
+}
+
+#how td {
+    padding-top: 20px;
+    vertical-align: top;
+    text-align: center;
+}

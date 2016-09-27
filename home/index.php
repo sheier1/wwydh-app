@@ -142,7 +142,23 @@
                 <p>"What would you do here?"</p>
             </div>
         </div>
-        <div id="how"></div>
+        <div id="how">
+            <div class="grid-inner width">
+                <h1 style="text-align:center"><font color="#3a3a3a">HOW IT WORKS</font></h1>
+                <table>
+                	<tr>
+                		<th><img src="../images/idea.png" /></th>
+                		<th><img src="../images/contributors.png" /></th>
+                		<th><img src="../images/implementation.png" /></th>
+                	</tr>
+                	<tr>
+                		<td>Submit an idea to WWYDH. Once it gets enough upvotes from other users, you have the ability as idea leader to move your idea on to the next stage.</td>
+                		<td>Your idea is matched with other ideas for the same vacant location. A checklist of people and resources your idea will need is generated. Once the checklist is complete, your idea is reviewed so it can move on to the next stage.</td>
+                		<td>Your idea becomes a project, and the project is implemented by anyone willing to contribute his or her time and skills to turn a vacant location into a useful space for the community.</td>
+                	</tr>
+                </table>
+            </div>
+        </div>
         <div id="contact"></div>
         <div id="footer">
             <div class="grid-inner">
