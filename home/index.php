@@ -62,7 +62,7 @@
             }
 
         </script>
-        <!-- scroll to contact -->
+        <!-- autoscroll to contact -->
         <?php if (isset($_GET["contact"])) { ?>
             <script type="text/javascript">
                 jQuery(document).ready(function($) {
@@ -73,11 +73,16 @@
             </script>
         <?php } ?>
 
+        <!-- scroll on click to contact -->
         <script type="text/javascript">
             jQuery(document).ready(function($) {
                 $("#nav a.contact").click(function(e) {
                     e.preventDefault();
                     $("html, body").animate({scrollTop: $("#contact").offset().top}, 650);
+                })
+
+                $("#see-how").click(function() {
+                    $("html, body").animate({scrollTop: $("#how").offset().top}, 650);
                 })
             });
         </script>
@@ -140,7 +145,7 @@
             <div id="map"></div>
             <div id="welcome">
                 <div class="width">
-                    <h1>See How it Works!</h1>
+                    <span id="see-how"><h1>See How it Works!</h1></span>
                     <div id="locationButton">Submit Location</div>
                 </div>
             </div>
