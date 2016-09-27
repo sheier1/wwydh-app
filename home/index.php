@@ -72,8 +72,49 @@
                 });
             </script>
         <?php } ?>
+
+        <script type="text/javascript">
+            jQuery(document).ready(function($) {
+                $("#nav a.contact").click(function(e) {
+                    e.preventDefault();
+                    $("html, body").animate({scrollTop: $("#contact").offset().top}, 650);
+                })
+            });
+        </script>
     </head>
     <body onload="initMap()">
+
+        <?php
+            // FRONTEND: remove this garbage style tag and externalize this stylesheet. This is just so I could see what I was doing
+        ?>
+        <style type="text/css">
+            .location_image, .project_image {
+                height: 100px;
+                width: 100px;
+                background-position: center;
+                background-size: cover;
+                float: left;
+            }
+
+            .location {
+                width: 100%;
+                clear: both;
+                margin-bottom: 10px;
+                padding-bottom: 10px;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+                overflow: hidden;
+            }
+
+            .location:last-child {
+                border-bottom-width: 0px;
+            }
+
+            .project {
+              overflow: hidden;
+            }
+        </style>
+    </head>
+    <body>
         <div id="nav">
             <div class="nav-inner width">
                 <a href="../home">
@@ -90,7 +131,7 @@
                         <a href="../locations"><li>Locations</li></a>
                         <a href="../ideas"><li>Ideas</li></a>
                         <a href="../projects"><li>Projects</li></a>
-                        <a href="../home?contact"><li>Contact</li></a>
+                        <a class="contact" href="../home?contact"><li>Contact</li></a>
                     </ul>
                 </div>
             </div>
@@ -170,7 +211,19 @@
                 </table>
             </div>
         </div>
-        <div id="contact"></div>
+        <div id="contact">
+          <div class="width">
+            <div id="contact_name">CONTACT US</div>
+				        <div id="form">
+                  <form action="#"> <!--BACKEND: Edit this action to wherever the form will submit to -->
+                    <input type="text" name="name" class="form-size" placeholder="Name"><br>
+                    <input type="text" name="email" class="form-size" placeholder="Email"><br>
+                    <textarea type="text" name="message" class="message" placeholder="Message"></textarea><br>
+                    <input type="submit" id="submit" class="form-size" value="SUBMIT">
+                  </form>
+                </div>
+            </div>
+        </div>
         <div id="footer">
             <div class="grid-inner">
                 &copy; Copyright WWYDH <?php echo date("Y") ?>
