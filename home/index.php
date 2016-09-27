@@ -29,6 +29,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>WWYDH | <?php echo isset($_GET["contact"]) ? "Contact" : "Home" ?></title>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,600i,700" rel="stylesheet">
         <link href="../helpers/header_footer.css" type="text/css" rel="stylesheet" />
         <link href="styles.css" type="text/css" rel="stylesheet" />
@@ -61,6 +62,16 @@
             }
 
         </script>
+        <!-- scroll to contact -->
+        <?php if (isset($_GET["contact"])) { ?>
+            <script type="text/javascript">
+                jQuery(document).ready(function($) {
+                    setTimeout(function() {
+                        $("html, body").animate({scrollTop: $("#contact").offset().top}, 650);
+                    }, 750);
+                });
+            </script>
+        <?php } ?>
     </head>
     <body onload="initMap()">
         <div id="nav">
