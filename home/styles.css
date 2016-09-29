@@ -1,3 +1,7 @@
+body {
+    color: #3a3a3a;
+}
+
 .location_image, .project_image {
     height: 100px;
     width: 100px;
@@ -60,7 +64,14 @@
     border-radius: 8px;
     padding: 13px;
     position: relative;
-    text-transform: uppercase
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+#locationButton:hover {
+    opacity: 0.9;
 }
 
 #map {
@@ -168,7 +179,7 @@
 
 #submit {
     -webkit-transition-duration: 0.4s;
-    trasition-duration: 0.4s;
+    transition-duration: 0.4s;
     background-color: #418040;
     width: 400px;
     height: 50px;
@@ -181,4 +192,80 @@
 #submit:hover {
     opacity:0.9;
     cursor: pointer;
+}
+
+ul.tab {
+    list-style-type: none;
+    padding: 0;
+    overflow: hidden;
+    border-bottom: 2px solid #418040;
+    background-color: #white;
+}
+
+ul.tab li {
+    width: 50%;
+    float: left;
+    display: block;
+    text-align: center;
+    padding: 14px 0px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 17px;
+    color: #3a3a3a;
+    cursor: pointer;
+    border-radius: 3px 3px 0px 0px;
+}
+
+#explore ul.tab li:hover, #explore li.active {
+    background-color: #418040;
+    color:white;
+}
+
+#explore li.active {
+    cursor: auto;
+}
+
+.tabcontent {
+    display: none;
+    left: 30px;
+    opacity: 0;
+    transition: 0.2s all ease;
+    position: relative;
+}
+
+.tabcontent.active {
+    display: block;
+    left: 0px;
+    opacity: 1;
+}
+
+#explore h1{
+    position: relative;
+    text-align: center;
+    color: #418040
+}
+
+#explore .width {
+    position: relative;
+}
+
+.location_image, .project_image {
+    height: 100px;
+    width: 100px;
+    background-position: center;
+    background-size: cover;
+    float: left;
+}
+
+.location, .project {
+    width: 100%;
+    clear: both;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.location:last-child {
+    border-bottom-width: 0px;
 }

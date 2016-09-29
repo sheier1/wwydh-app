@@ -86,38 +86,28 @@
                 })
             });
         </script>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("li.tablink").click(function() {
+                    if (!$(this).hasClass("active")) {
+                        // handle nav change
+                        $("li.tablink").removeClass("active");
+                        $(this).addClass("active");
+
+                        // handle content change
+                        $(".tabcontent").removeClass("active");
+                        $(".tabcontent[data-tab=" + $(this).data("target") + "]").addClass("active");
+                    }
+                })
+            })
+       </script>
     </head>
     <body onload="initMap()">
 
         <?php
             // FRONTEND: remove this garbage style tag and externalize this stylesheet. This is just so I could see what I was doing
         ?>
-        <style type="text/css">
-            .location_image, .project_image {
-                height: 100px;
-                width: 100px;
-                background-position: center;
-                background-size: cover;
-                float: left;
-            }
-
-            .location {
-                width: 100%;
-                clear: both;
-                margin-bottom: 10px;
-                padding-bottom: 10px;
-                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-                overflow: hidden;
-            }
-
-            .location:last-child {
-                border-bottom-width: 0px;
-            }
-
-            .project {
-              overflow: hidden;
-            }
-        </style>
     </head>
     <body>
         <div id="nav">
@@ -151,42 +141,49 @@
             </div>
         </div>
         <div id="explore">
-            <div id="locations">
-                <?php
-                foreach($locations as $l) { ?>
-                    <div class="location">
-                        <?php if ($l["ideas"] > 0) { ?>
-                            <div class="ideas_count"><?php echo $l["ideas"] ?></div>
-                        <?php } ?>
-                        <div class="location_image" style="background-image: url(../helpers/location_images/<?php if (isset($l['image'])) echo $l['image']; else echo "pin.png";?>);"></div>
-                        <div class="address"><?php echo $l["mailing_address"] ?></div>
-                        <?php if (isset($l["features"])) { ?>
-                            <div class="features">
-                                <span>Features:</span>
-                                    <ul>
-                                        <?php foreach ($l["features"] as $f) { ?>
-                                            <li><?php echo $f ?></li>
-                                        <?php } ?>
-                                    </ul>
-                            </div>
-                        <?php } ?>
-                        <div class="btn"><a href="../newidea?location=<?php echo $l["id"] ?>">I have an idea</a></div>
-                        <?php if ($l["ideas"] > 0) { ?> <div class="btn"><a href="../ideas?location=<?php echo $l["id"] ?>">See other ideas here</a></div> <?php } ?>
-                        <div class="btn"><a href="propertyInfo.php?id=<?php echo $l["id"] ?>">View full location</a></div>
-                    </div>
-                <?php }
-                ?>
-            </div>
-            <div id="projects">
-                <?php
-                foreach ($projects as $p) { ?>
-                    <div class="project">
-                        <div class="project_image" style="background-image: url(../helpers/location_images/<?php if (isset($p['image'])) echo $p['image']; else echo "no_image.png";?>);"></div>
-                        <div class="project_leader"><?php echo $p["leader"] ?></div>
-                        <div class="address"><?php echo $p["address"] ?></div>
-                        <div class="project_status">Status: <?php echo $p["completed"] == 0 ? "unfinished" : "finished" ?></div>
-                    </div>
-                <?php } ?>
+            <div class="width">
+                <h1> EXPLORE </h1>
+                <ul class="tab">
+                    <li class="active tablink" data-target="1">Locations</li>
+                    <li class="tablink" data-target="2">Projects</li>
+                </ul>
+                <div id="locations" class="tabcontent active" data-tab="1">
+                    <?php
+                    foreach($locations as $l) { ?>
+                        <div class="location">
+                            <?php if ($l["ideas"] > 0) { ?>
+                                <div class="ideas_count"><?php echo $l["ideas"] ?></div>
+                            <?php } ?>
+                            <div class="location_image" style="background-image: url(../helpers/location_images/<?php if (isset($l['image'])) echo $l['image']; else echo "pin.png";?>);"></div>
+                            <div class="address"><?php echo $l["mailing_address"] ?></div>
+                            <?php if (isset($l["features"])) { ?>
+                                <div class="features">
+                                    <span>Features:</span>
+                                        <ul>
+                                            <?php foreach ($l["features"] as $f) { ?>
+                                                <li><?php echo $f ?></li>
+                                            <?php } ?>
+                                        </ul>
+                                </div>
+                            <?php } ?>
+                            <div class="btn"><a href="../newidea?location=<?php echo $l["id"] ?>">I have an idea</a></div>
+                            <?php if ($l["ideas"] > 0) { ?> <div class="btn"><a href="../ideas?location=<?php echo $l["id"] ?>">See other ideas here</a></div> <?php } ?>
+                            <div class="btn"><a href="propertyInfo.php?id=<?php echo $l["id"] ?>">View full location</a></div>
+                        </div>
+                    <?php }
+                    ?>
+                </div>
+                <div id="projects" class="tabcontent" data-tab="2">
+                    <?php
+                    foreach ($projects as $p) { ?>
+                        <div class="project">
+                            <div class="project_image" style="background-image: url(../helpers/location_images/<?php if (isset($p['image'])) echo $p['image']; else echo "no_image.png";?>);"></div>
+                            <div class="project_leader"><?php echo $p["leader"] ?></div>
+                            <div class="address"><?php echo $p["address"] ?></div>
+                            <div class="project_status">Status: <?php echo $p["completed"] == 0 ? "unfinished" : "finished" ?></div>
+                        </div>
+                    <?php } ?>
+                </div>
             </div>
         </div>
         <div id="about">
@@ -209,9 +206,9 @@
                 		<th><img src="../images/implementation.png" /></th>
                 	</tr>
                 	<tr>
-                		<td>Submit an idea to WWYDH. Once it gets enough upvotes from other users, you have the ability as idea leader to move your idea on to the next stage.</td>
-                		<td>Your idea is matched with other ideas for the same vacant location. A checklist of people and resources your idea will need is generated. Once the checklist is complete, your idea is reviewed so it can move on to the next stage.</td>
-                		<td>Your idea becomes a project, and the project is implemented by anyone willing to contribute his or her time and skills to turn a vacant location into a useful space for the community.</td>
+                		<td>Submit an idea for a location to WWYDH. You can choose to anonymously submit the idea for someone else to eventually lead, or lead the idea yourself. </td>
+                		<td>Ideas can be upvoted and downvoted, so the best rise to the top. A checklist of people and resources the idea will need is generated. Once the checklist is complete, the idea is reviewed so it can move on to the next stage.</td>
+                		<td>The idea becomes a project, and the project is implemented by everyone who pledged to contribute his or her time and skills to turn a vacant location into a useful space for the community.</td>
                 	</tr>
                 </table>
             </div>
