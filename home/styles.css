@@ -250,11 +250,30 @@ ul.tab li {
 }
 
 .location_image, .project_image {
-    height: 100px;
-    width: 100px;
+    width: 250px;
+    height: 150px;
     background-position: center;
     background-size: cover;
     float: left;
+    margin-right: 10px;
+    position: relative;
+}
+
+.ideas_count {
+    background: #ffae00;
+    color: white;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    font-weight: 700;
+    border-radius: 50%;
+    padding: 5px 0px 0px 11px;
+    box-sizing: border-box;
+    box-shadow: -2px 0px 5px 0px rgba(0, 0, 0, 0.35);
+    font-size: 14px;
+    -webkit-font-smoothing: subpixel-antialiased;
 }
 
 .location, .project {
@@ -268,4 +287,105 @@ ul.tab li {
 
 .location:last-child {
     border-bottom-width: 0px;
+}
+
+.location_desc {
+    color: white;
+    padding: 5px 5px;
+    box-sizing: border-box;
+    -webkit-font-smoothing: subpixel-antialiased;
+    color: #3a3a3a;
+    overflow: hidden;
+}
+
+.location .location_desc .features {
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+.location .location_desc .features span {
+    font-weight: 700;
+}
+
+.location .location_desc .features ul {
+    margin-top: 0;
+}
+
+.location .location_desc .features ul li {
+    font-weight: 400;
+}
+
+.location .location_desc .features ul span {
+    margin-top: 0;
+    font-weight: 400;
+    color: rgba( 0, 0, 0, 0.5);
+}
+
+.btn-group {
+    float: right;
+}
+
+.location .btn-group .btn {
+    width: 180px;
+    padding: 12px 0px;
+    text-align: center;
+    transition: all 0.2s ease;
+    border-radius: 3px;
+    margin-top: 6px;
+    text-transform: uppercase;
+    font-size: 12px;
+    border: 2px solid transparent;
+}
+
+.location .btn-group .btn a {
+    color: white;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+.location .btn-group .btn:hover {
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.location .btn-group .btn.newidea {
+    background: #418040;
+}
+
+.location .btn-group .btn.newidea:hover {
+    background: white;
+    border-color: #418040;
+}
+
+.location .btn-group .btn.newidea:hover a {
+    color: #418040;
+}
+
+.location .btn-group .btn.seeideas {
+    background: #ffae00;
+}
+
+.location .btn-group .btn.seeideas:hover {
+    background: white;
+    border-color: #ffae00;
+    color: #ffae00 !important;
+}
+
+.location .btn-group .btn.seeideas:hover a {
+    color: #ffae00;
+}
+
+.location .btn-group .btn.seelocation {
+    background: #a7a7a7;
+}
+
+.location .btn-group .btn.seelocation:hover {
+    background: white;
+    border-color: #a7a7a7;
+    color: #a7a7a7 !important;
+}
+
+.location .btn-group .btn.seelocation:hover a {
+    color: #a7a7a7;
 }

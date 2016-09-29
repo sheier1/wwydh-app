@@ -151,24 +151,29 @@
                     <?php
                     foreach($locations as $l) { ?>
                         <div class="location">
-                            <?php if ($l["ideas"] > 0) { ?>
-                                <div class="ideas_count"><?php echo $l["ideas"] ?></div>
-                            <?php } ?>
-                            <div class="location_image" style="background-image: url(../helpers/location_images/<?php if (isset($l['image'])) echo $l['image']; else echo "pin.png";?>);"></div>
-                            <div class="address"><?php echo $l["mailing_address"] ?></div>
-                            <?php if (isset($l["features"])) { ?>
-                                <div class="features">
-                                    <span>Features:</span>
-                                        <ul>
-                                            <?php foreach ($l["features"] as $f) { ?>
-                                                <li><?php echo $f ?></li>
-                                            <?php } ?>
-                                        </ul>
-                                </div>
-                            <?php } ?>
-                            <div class="btn"><a href="../newidea?location=<?php echo $l["id"] ?>">I have an idea</a></div>
-                            <?php if ($l["ideas"] > 0) { ?> <div class="btn"><a href="../ideas?location=<?php echo $l["id"] ?>">See other ideas here</a></div> <?php } ?>
-                            <div class="btn"><a href="propertyInfo.php?id=<?php echo $l["id"] ?>">View full location</a></div>
+                            <div class="btn-group">
+                                <div class="btn newidea"><a href="../newidea?location=<?php echo $l["id"] ?>">I have an idea</a></div>
+                                <?php if ($l["ideas"] > 0) { ?> <div class="btn seeideas"><a href="../ideas?location=<?php echo $l["id"] ?>">See other ideas here</a></div> <?php } ?>
+                                <div class="btn seelocation"><a href="propertyInfo.php?id=<?php echo $l["id"] ?>">View full location</a></div>
+                            </div>
+                            <div class="location_image" style="background-image: url(../helpers/location_images/<?php if (isset($l['image'])) echo $l['image']; else echo "no_image.jpg";?>);">
+                                <?php if ($l["ideas"] > 0) { ?>
+                                    <div class="ideas_count"><?php echo $l["ideas"] ?></div>
+                                <?php } ?>
+                            </div>
+                            <div class="location_desc">
+                                <div class="address"><?php echo $l["mailing_address"] ?></div>
+                                <?php if (isset($l["features"])) { ?>
+                                    <div class="features">
+                                        <span>Features:</span>
+                                            <ul>
+                                                <?php foreach ($l["features"] as $f) { ?>
+                                                    <li><?php echo $f ?></li>
+                                                <?php } ?>
+                                            </ul>
+                                    </div>
+                                <?php } ?>
+                            </div>
                         </div>
                     <?php }
                     ?>
