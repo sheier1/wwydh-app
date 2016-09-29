@@ -1,5 +1,7 @@
 <?php
 
+    session_start();
+
     include "../helpers/conn.php";
 
     // BACKEND:0 change homepage location query to ORDER BY RAND() LIMIT 3
@@ -28,7 +30,7 @@
 <html>
     <head>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,600i,700" rel="stylesheet">
-        <link href="header_footer.css" type="text/css" rel="stylesheet" />
+        <link href="../helpers/header_footer.css" type="text/css" rel="stylesheet" />
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzAMBl8WEWkqExNw16kEk40gCOonhMUmw&callback=initMap" async defer></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script type="text/javascript">
@@ -87,8 +89,9 @@
     <body>
         <div id="nav">
             <div class="nav-inner width">
-                <div id="logo"></div>
-                <div id="logo_name">What Would You Do Here?</div>
+                <a href="../home">
+                    <div id="logo"></div>
+                    <div id="logo_name">What Would You Do Here?</div>
                 <div id="user_nav" class="nav">
                     <ul>
                         <a href="#"><li>Log in</li></a>
@@ -97,7 +100,7 @@
                 </div>
                 <div id="main_nav" class="nav">
                     <ul>
-                        <a href="#"><li>Locations</li></a>
+                        <a href="../locations"><li>Locations</li></a>
                         <a href="#"><li>Ideas</li></a>
                         <a href="#"><li>Projects</li></a>
                         <a href="#"><li>Contact</li></a>
@@ -128,7 +131,7 @@
                         <?php } ?>
                         <div class="btn"><a href="../newidea?location=<?php echo $l["id"] ?>">I have an idea</a></div>
                         <?php if ($l["ideas"] > 0) { ?> <div class="btn"><a href="../ideas?location=<?php echo $l["id"] ?>">See other ideas here</a></div> <?php } ?>
-                        <div class="btn"><a href="../locattion?id=<?php echo $l["id"] ?>">View full location</a></div>
+                        <div class="btn"><a href="propertyInfo.php?id=<?php echo $l["id"] ?>">View full location</a></div>
                     </div>
                 <?php }
                 ?>
@@ -137,7 +140,7 @@
                 <?php
                 foreach ($projects as $p) { ?>
                     <div class="project">
-                        <div class="project_image" style="background-image: url(../helpers/location_images/<?php if (isset($p['image'])) echo $p['image']; else echo "pin.png";?>);"></div>
+                        <div class="project_image" style="background-image: url(../helpers/location_images/<?php if (isset($p['image'])) echo $p['image']; else echo "no_image.png";?>);"></div>
                         <div class="project_leader"><?php echo $p["leader"] ?></div>
                         <div class="address"><?php echo $p["address"] ?></div>
                         <div class="project_status">Status: <?php echo $p["completed"] == 0 ? "unfinished" : "finished" ?></div>
@@ -150,7 +153,7 @@
         <div id="contact"></div>
         <div id="footer">
             <div class="grid-inner">
-                &copy; <?php echo date("Y") ?>
+                &copy; Copyright WWYDH <?php echo date("Y") ?>
             </div>
         </div>
     </body>
