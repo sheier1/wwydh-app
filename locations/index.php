@@ -190,21 +190,22 @@ echo "<table width=1>";
 			<?php
 			while ($row = $data->fetch_array(MYSQLI_ASSOC)) {
 				if (isset($row["features"])) $row["features"] = implode(" | ", explode("[-]", $row["features"])); ?>
-
-				<div class="location">
-					<div class="grid-item">
-						<?php if ($row["ideas"] > 0) { ?>
-							<div class="ideas_count"><?php echo $row["ideas"] ?></div>
-						<?php } ?>
-						<div class="location_image" style="background-image: url(../helpers/location_images/<?php if (isset($row['image'])) echo $row['image']; else echo "no_image.jpg";?>);"></div>
-						<div class="location_desc">
-							<div class="address"><?php echo $row["mailing_address"] ?></div>
-							<div class="features">
-								<?php echo $row["features"] ?>
+				<a href="propertyInfo.php?id=<?php echo $row["id"] ?>">
+					<div class="location">
+						<div class="grid-item">
+							<?php if ($row["ideas"] > 0) { ?>
+								<div class="ideas_count"><?php echo $row["ideas"] ?></div>
+							<?php } ?>
+							<div class="location_image" style="background-image: url(../helpers/location_images/<?php if (isset($row['image'])) echo $row['image']; else echo "no_image.jpg";?>);"></div>
+							<div class="location_desc">
+								<div class="address"><?php echo $row["mailing_address"] ?></div>
+								<div class="features">
+									<?php echo $row["features"] ?>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				</a>
 		 	<?php }
 			?>
 		</div>
