@@ -205,21 +205,13 @@ echo "<table width=1>";
 						</div>
 					</div>
 				</div>
-				<!--
-			  echo "<tr><td style=\"background-image:url(../helpers/location_images/{$row["image"]})\">
-			 <div class=\"address\">{$row["building_address"]}</div><br/>
-			 <div class=\"neighborhood\">{$row["neighborhood"]}</div><br/>
-			 <div class=\"city\">{$row["city"]}</div><br/>
-			 <div class=\"more\"><a href=\"propertyInfo.php?id={$row["id"]}\">(more)</a></div><br/>
-			 </td></tr>
-			 "; -->
 		 	<?php }
 			?>
 		</div>
 		<div id="pagination">
 			<div class="grid-inner">
 				<ul>
-				<?php for ($i = 1; $i <= ceil($total / $itemCount); $i++) { ?>
+				<?php for ($i = 1; $i <= ceil($total / $itemCount) && $i < $page + 10; $i++) { ?>
 					<li><a href="?page=<?php echo $i ?>"><?php echo $i ?></a></li>
 				<?php } ?>
 				</ul>

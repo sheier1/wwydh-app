@@ -5,7 +5,7 @@
     include "../helpers/conn.php";
 
     // BACKEND:0 change homepage location query to ORDER BY RAND() LIMIT 3
-    $q = $conn->prepare("SELECT l.*, COUNT(DISTINCT i.id) AS ideas, GROUP_CONCAT(DISTINCT f.feature SEPARATOR '[-]') AS features FROM locations l LEFT JOIN ideas i ON i.location_id = l.id LEFT JOIN location_features f ON f.location_id = l.id GROUP BY l.id LIMIT 3");
+    $q = $conn->prepare("SELECT l.*, COUNT(DISTINCT i.id) AS ideas, GROUP_CONCAT(DISTINCT f.feature SEPARATOR '[-]') AS features FROM locations l LEFT JOIN ideas i ON i.location_id = l.id LEFT JOIN location_features f ON f.location_id = l.id WHERE l.id < 37 OR l.id = 3 GROUP BY l.id ORDER BY ideas DESC, RAND() LIMIT 4");
     $q->execute();
 
     $data = $q->get_result();
@@ -154,7 +154,7 @@
                             <div class="btn-group">
                                 <div class="btn newidea"><a href="../newidea?location=<?php echo $l["id"] ?>">I have an idea</a></div>
                                 <?php if ($l["ideas"] > 0) { ?> <div class="btn seeideas"><a href="../ideas?location=<?php echo $l["id"] ?>">See other ideas here</a></div> <?php } ?>
-                                <div class="btn seelocation"><a href="propertyInfo.php?id=<?php echo $l["id"] ?>">View full location</a></div>
+                                <div class="btn seelocation"><a href="../locations/propertyInfo.php?id=<?php echo $l["id"] ?>">View full location</a></div>
                             </div>
                             <div class="location_image" style="background-image: url(../helpers/location_images/<?php if (isset($l['image'])) echo $l['image']; else echo "no_image.jpg";?>);">
                                 <?php if ($l["ideas"] > 0) { ?>
@@ -212,7 +212,7 @@
                 	</tr>
                 	<tr>
                 		<td>Submit an idea for a location to WWYDH. You can choose to anonymously submit the idea for someone else to eventually lead, or lead the idea yourself. </td>
-                		<td>Ideas can be upvoted and downvoted, so the best rise to the top. A checklist of people and resources the idea will need is generated. Once the checklist is complete, the idea is reviewed so it can move on to the next stage.</td>
+                		<td>Ideas can be upvoted and downvoted, so the best rise to the top. A checklist of people and resources the idea will need is generated. Users can contribute to the idea by volunteering to fill one or more of the requirements on the list. When the list is complete, the idea can move to the next stage.</td>
                 		<td>The idea becomes a project, and the project is implemented by everyone who pledged to contribute his or her time and skills to turn a vacant location into a useful space for the community.</td>
                 	</tr>
                 </table>
