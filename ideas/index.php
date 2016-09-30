@@ -18,6 +18,13 @@
 	// BACKEND: change locations search code to prepared statements to prevent SQL injection
 	if ($_GET["isSearch"]) {
 		$theQuery = "SELECT * FROM `locations` WHERE `building_address` LIKE '%{$_GET["sAddress"]}%' AND `building_address` LIKE '%{$_GET["sAddress"]}%' AND `block` LIKE '%{$_GET["sBlock"]}%' AND `lot` LIKE '%{$_GET["sLot"]}%' AND `zip_code` LIKE '%{$_GET["sZip"]}%' AND `city` LIKE '%{$_GET["sCity"]}%' AND `neighborhood` LIKE '%{$_GET["sNeighborhood"]}%' AND `police_district` LIKE '%{$_GET["sPoliceDistrict"]}%' AND `council_district` LIKE '%{$_GET["sCouncilDistrict"]}%' AND `longitude` LIKE '%{$_GET["sLongitude"]}%' AND `latitude` LIKE '%{$_GET["sLatitude"]}%' AND `owner` LIKE '%{$_GET["sOwner"]}%' AND `use` LIKE '%{$_GET["sUse"]}%' AND `mailing_address` LIKE '%{$_GET["sMailingAddr"]}%'";
+	} else if (isset($_GET["location"])) {
+		$l = $_GET["location"];
+		$q = $conn->prepare("SELECT u.name AS `name`, i.*, GROUP_CONCAT(cc.description SEPARATOR '[-]') as `checklist`, l.mailing_address, l.image FROM ideas i LEFT JOIN users u ON u.id = i.leader_id
+		LEFT JOIN locations l ON i.location_id = l.id
+		LEFT JOIN checklists c ON c.idea_id = i.id
+		LEFT JOIN checklist_items cc ON cc.checklist_id = c.id
+		WHERE cc.contributer_id IS NULL AND i.location_id = $l GROUP BY i.id");
 	} else {
 		$q = $conn->prepare("SELECT u.name AS `name`, i.*, GROUP_CONCAT(cc.description SEPARATOR '[-]') as `checklist`, l.mailing_address, l.image FROM ideas i LEFT JOIN  users u ON u.id = i.leader_id LEFT JOIN locations l ON i.location_id = l.id LEFT JOIN checklists c ON
 		c.idea_id = i.id LEFT JOIN checklist_items cc ON cc.checklist_id = c.id WHERE cc.contributer_id IS NULL GROUP BY i.id");
