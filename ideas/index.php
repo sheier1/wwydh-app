@@ -2,7 +2,7 @@
 
 	session_start();
 
-	include "../helpers/paginate.php";
+	include "../helpers/vars.php";
 	include "../helpers/conn.php";
 
 	$theQuery = "";
@@ -13,7 +13,7 @@
 	$q->execute();
 
 	$total = $q->get_result()->fetch_array(MYSQLI_ASSOC)["total"];
-	$offset = $itemCount * ($page - 1);
+	$offset = $itemsPerPage * ($page - 1);
 
 	// BACKEND: change locations search code to prepared statements to prevent SQL injection
 	if ($_GET["isSearch"]) {
@@ -118,7 +118,7 @@
 		<div id="pagination">
 			<div class="grid-inner">
 				<ul>
-				<?php for ($i = 1; $i <= ceil($total / $itemCount); $i++) { ?>
+				<?php for ($i = ($page - 5 > 0) ? $page - 5 : 1; $i <= ceil($total / $itemCount); $i++) { ?>
 					<li><a href="?page=<?php echo $i ?>"><?php echo $i ?></a></li>
 				<?php } ?>
 				</ul>
