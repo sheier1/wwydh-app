@@ -62,25 +62,10 @@
             }
 
         </script>
-        <!-- autoscroll to contact -->
-        <?php if (isset($_GET["contact"])) { ?>
-            <script type="text/javascript">
-                jQuery(document).ready(function($) {
-                    setTimeout(function() {
-                        $("html, body").animate({scrollTop: $("#contact").offset().top}, 650);
-                    }, 750);
-                });
-            </script>
-        <?php } ?>
 
-        <!-- scroll on click to contact -->
+        <!-- scroll on click to how it works -->
         <script type="text/javascript">
             jQuery(document).ready(function($) {
-                $("#nav a.contact").click(function(e) {
-                    e.preventDefault();
-                    $("html, body").animate({scrollTop: $("#contact").offset().top}, 650);
-                })
-
                 $("#see-how").click(function() {
                     $("html, body").animate({scrollTop: $("#how").offset().top}, 650);
                 })
@@ -126,7 +111,7 @@
                         <a href="../locations"><li>Locations</li></a>
                         <a href="../ideas"><li>Ideas</li></a>
                         <a href="../projects"><li>Projects</li></a>
-                        <a class="contact" href="../home?contact"><li>Contact</li></a>
+                        <a href="../contact"><li>Contact</li></a>
                     </ul>
                 </div>
             </div>
@@ -216,19 +201,6 @@
                 		<td>The idea becomes a project, and the project is implemented by everyone who pledged to contribute his or her time and skills to turn a vacant location into a useful space for the community.</td>
                 	</tr>
                 </table>
-            </div>
-        </div>
-        <div id="contact">
-          <div class="width">
-            <div id="contact_name">CONTACT US</div>
-				        <div id="form">
-                  <form action="#"> <!--BACKEND: Edit this action to wherever the form will submit to -->
-                    <input type="text" name="name" class="form-size" placeholder="Name"><br>
-                    <input type="text" name="email" class="form-size" placeholder="Email"><br>
-                    <textarea type="text" name="message" class="message" placeholder="Message"></textarea><br>
-                    <input type="submit" id="submit" class="form-size" value="SUBMIT">
-                  </form>
-                </div>
             </div>
         </div>
         <div id="footer">
