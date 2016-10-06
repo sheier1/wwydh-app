@@ -214,7 +214,9 @@ echo "<table width=1>";
 				<ul>
 				<?php
 					$starting_page = ($page - 5 > 0) ? $page - 5 : 1;
-					for ($i = 0; $i <= 10 && $page + 5 < ceil($total / $itemCount); $i++) { ?>
+					$ending_page = ($page + 5 < ceil($total / $itemCount)) ? $page + 5 : ceil($total / $itemCount);
+
+					for ($i = 0; $i <= 10 && $starting_page + $i <= $ending_page; $i++) { ?>
 						<li><a <?php echo ($page == $starting_page + $i) ? 'class="active"' : "" ?>
 							href="?page=<?php echo $starting_page + $i ?>"><?php echo $starting_page + $i ?></a>
 						</li>
