@@ -137,7 +137,7 @@
                     foreach($locations as $l) { ?>
                         <div class="location">
                             <div class="btn-group">
-                                <div class="btn newidea"><a href="../newidea?location=<?php echo $l["id"] ?>">I have an idea</a></div>
+                                <div class="btn newidea"><a href="../ideas/new?location=<?php echo $l["id"] ?>">I have an idea</a></div>
                                 <?php if ($l["ideas"] > 0) { ?> <div class="btn seeideas"><a href="../ideas?location=<?php echo $l["id"] ?>">See other ideas here</a></div> <?php } ?>
                                 <div class="btn seelocation"><a href="../locations/propertyInfo.php?id=<?php echo $l["id"] ?>">View full location</a></div>
                             </div>
