@@ -35,82 +35,15 @@
         <link href="style.css" type="text/css" rel="stylesheet" />
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzAMBl8WEWkqExNw16kEk40gCOonhMUmw" async defer></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
         <script type="text/javascript">
             // convert location data from php to javascript using JSON
             var locations = jQuery.parseJSON('<?php echo str_replace("'", "\'", json_encode($locations)) ?>');
-
-            function initMap() {
-                // Create a map object and specify the DOM element for display.
-                var map = new google.maps.Map(document.getElementById('map'), {
-                    animation: google.maps.Animation.DROP,
-                    center: {lat: parseFloat(locations[0].latitude), lng: parseFloat(locations[0].longitude)},
-                    scrollwheel: false,
-                    zoom: 14
-                });
-
-                $(locations).each(function() {
-                    var marker = new google.maps.Marker({
-                        map: map,
-                        position: {lat: parseFloat(this.latitude), lng: parseFloat(this.longitude)},
-                        address: this.mailing_address
-                    });
-
-                    marker.addListener("click", function() {
-                        alert(this.address); // FRONTEND:10 change the map marker click listener to trigger location popup
-                    })
-                })
-            }
-
         </script>
 
-        <!-- scroll on click to how it works -->
-        <script type="text/javascript">
-            jQuery(document).ready(function($) {
-                $("#see-how").click(function() {
-                    $("html, body").animate({scrollTop: $("#how").offset().top}, 650);
-                })
-            });
-        </script>
-
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $("li.tablink").click(function() {
-                    if (!$(this).hasClass("active")) {
-                        // handle nav change
-                        $("li.tablink").removeClass("active");
-                        $(this).addClass("active");
-
-                        // handle content change
-                        $(".tabcontent").removeClass("active");
-                        $(".tabcontent[data-tab=" + $(this).data("target") + "]").addClass("active");
-                    }
-                })
-            })
-       </script>
-
-       <script type="text/javascript">
-           function openNav() {
-               document.getElementById("mySidenav").style.width = "250px";
-           }
-
-           function closeNav() {
-               document.getElementById("mySidenav").style.width = "0";
-           }
-       </script>
-
+        <script src="scripts.js" type="text/javascript"></script>
     </head>
     <body onload="initMap(); openNav();">
-        <div id="mySidenav" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">Close &times;</a>
-            <div id="sideIdea">I Have an Idea</div>
-            <div id="sideLocation">I Have a Location</div>
-            <div id="sideHelp">I Want to Help</div>
-            <div id="sideContact">Contact Us</div>
-        </div>
-        <div id="sideOpen">
-            <span style="font-size:30px;cursor:pointer;color: #939393" onclick="openNav()">&#9776; Menu</span>
-        </div>
-
         <div id="nav">
             <div class="nav-inner width">
                 <a href="../home">
@@ -133,6 +66,15 @@
             </div>
         </div>
         <div id="mapContainer">
+            <div id="mySidenav" class="sidenav">
+                <div class="sidebar-tools">
+
+                </div>
+                <div id="sideIdea" class="side-button">I Have an Idea</div>
+                <div id="sideLocation" class="side-button">I Have a Location</div>
+                <div id="sideHelp" class="side-button">I Want to Contribute</div>
+                <div id="sideContact" class="side-button">Contact Us</div>
+            </div>
             <div id="map"></div>
             <div id="welcome">
                 <div class="width">
