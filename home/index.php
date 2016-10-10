@@ -32,7 +32,7 @@
         <title>WWYDH | <?php echo isset($_GET["contact"]) ? "Contact" : "Home" ?></title>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,600i,700" rel="stylesheet">
         <link href="../helpers/header_footer.css" type="text/css" rel="stylesheet" />
-        <link href="styles.css" type="text/css" rel="stylesheet" />
+        <link href="style.css" type="text/css" rel="stylesheet" />
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzAMBl8WEWkqExNw16kEk40gCOonhMUmw" async defer></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script type="text/javascript">
@@ -87,8 +87,30 @@
                 })
             })
        </script>
+
+       <script type="text/javascript">
+           function openNav() {
+               document.getElementById("mySidenav").style.width = "250px";
+           }
+
+           function closeNav() {
+               document.getElementById("mySidenav").style.width = "0";
+           }
+       </script>
+
     </head>
-    <body onload="initMap()">
+    <body onload="initMap(); openNav();">
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">Close &times;</a>
+            <div id="sideIdea">I Have an Idea</div>
+            <div id="sideLocation">I Have a Location</div>
+            <div id="sideHelp">I Want to Help</div>
+            <div id="sideContact">Contact Us</div>
+        </div>
+        <div id="sideOpen">
+            <span style="font-size:30px;cursor:pointer;color: #939393" onclick="openNav()">&#9776; Menu</span>
+        </div>
+
         <div id="nav">
             <div class="nav-inner width">
                 <a href="../home">
