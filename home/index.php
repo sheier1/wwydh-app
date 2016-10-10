@@ -20,10 +20,10 @@
     $q->execute();
 
     $data = $q->get_result();
-    $projects = [];
+    $ideas = [];
 
     while ($row = $data->fetch_array(MYSQLI_ASSOC)) {
-        array_push($projects, $row);
+        array_push($ideas, $row);
     }
 ?>
 <!DOCTYPE html>
@@ -89,12 +89,6 @@
        </script>
     </head>
     <body onload="initMap()">
-
-        <?php
-            // FRONTEND: remove this garbage style tag and externalize this stylesheet. This is just so I could see what I was doing
-        ?>
-    </head>
-    <body>
         <div id="nav">
             <div class="nav-inner width">
                 <a href="../home">
@@ -164,15 +158,38 @@
                     ?>
                 </div>
                 <div id="projects" class="tabcontent" data-tab="2">
-                    <?php
-                    foreach ($projects as $p) { ?>
-                        <div class="project">
-                            <div class="project_image" style="background-image: url(../helpers/location_images/<?php if (isset($p['image'])) echo $p['image']; else echo "no_image.png";?>);"></div>
-                            <div class="project_leader"><?php echo $p["leader"] ?></div>
-                            <div class="address"><?php echo $p["address"] ?></div>
-                            <div class="project_status">Status: <?php echo $p["completed"] == 0 ? "unfinished" : "finished" ?></div>
-                        </div>
-                    <?php } ?>
+                    <!-- <div id="ideas" class="tabcontent active" data-tab="2"> -->
+                   <?php
+                   foreach($ideas as $i) { ?>
+                       <div class="idea">
+                           <div class="btn-group">
+                               <div class="btn newidea"><a href="../newidea?location=<?php echo $l["id"] ?>">I have a similar idea</a></div>
+                               <?php if ($i["ideas"] > 0) { ?> <div class="btn seeideas"><a href="../ideas?location=<?php echo $i["id"] ?>">See other ideas nearby</a></div> <?php } ?>
+                               <div class="btn seelocation"><a href="../locations/propertyInfo.php?id=<?php echo $i["id"] ?>">View full location</a></div>
+                           </div>
+                           <div class="idea_image" style="background-image: url(../helpers/location_images/<?php if (isset($i['image'])) echo $i['image']; else echo "no_image.jpg";?>);">
+                               <?php if ($l["ideas"] > 0) { ?>
+                                   <div class="ideas_count"><?php echo $i["ideas"] ?></div>
+                               <?php } ?>
+                           </div>
+                           <div class="idea_desc">
+                               <div class="idea_leader"><?php echo $i["leader"] ?></div>
+                               <div class="address"><?php echo $i["address"] ?></div>
+                  <div class="idea_status">Status: <?php echo $i["completed"] == 0 ? "unfinished" : "finished" ?></div>
+                               <?php if (isset($i["features"])) { ?>
+                                   <div class="features">
+                                       <span>Features:</span>
+                                           <ul>
+                                               <?php foreach ($i["features"] as $f) { ?>
+                                                   <li><?php echo $f ?></li>
+                                               <?php } ?>
+                                           </ul>
+                                   </div>
+                               <?php } ?>
+                           </div>
+                       </div>
+                   <?php }
+                   ?>
                 </div>
             </div>
         </div>
