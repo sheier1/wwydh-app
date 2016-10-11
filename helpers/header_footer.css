@@ -12,17 +12,19 @@ body {
 
 #nav {
     background: white;
-    positon: fixed;
+    position: fixed;
     top: 0;
     left: 0;
     overflow: hidden;
     padding: 5px 0;
+    width: 100%;
+    z-index: 10;
+    box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.3);
 }
 
 .nav-inner {
     overflow: hidden;
 }
-
 
 #nav #logo {
     background-image: url(../images/logo.png);
@@ -54,10 +56,21 @@ body {
     text-decoration: none;
     transition: color 0.15s ease;
     font-size: 14px;
+    position: relative;
 }
 
 .nav a:hover, .nav a.active {
     color: #418040;
+}
+
+.nav a.active:after {
+    content: " ";
+    background: #418040;
+    height: 2px;
+    width: 100%;
+    left: 0;
+    position: absolute;
+    bottom: -3px;
 }
 
 .nav ul {
@@ -67,11 +80,7 @@ body {
 .nav li {
     list-style-type: none;
     display: inline-block;
-    margin-right: 8px;
-}
-
-.nav a:last-child li {
-    margin-right: 0px;
+    margin: 0px 4px;
 }
 
 #user_nav {
@@ -81,7 +90,7 @@ body {
 }
 
 #footer {
-    background-color: #2d2d2d;
+    background-color: #262626;
     text-align: center;
     color: white;
     clear: both;
