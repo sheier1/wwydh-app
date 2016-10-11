@@ -20,10 +20,10 @@
     $q->execute();
 
     $data = $q->get_result();
-    $projects = [];
+    $ideas = [];
 
     while ($row = $data->fetch_array(MYSQLI_ASSOC)) {
-        array_push($projects, $row);
+        array_push($ideas, $row);
     }
 ?>
 <!DOCTYPE html>
@@ -32,84 +32,18 @@
         <title>WWYDH | <?php echo isset($_GET["contact"]) ? "Contact" : "Home" ?></title>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,600i,700" rel="stylesheet">
         <link href="../helpers/header_footer.css" type="text/css" rel="stylesheet" />
-        <link href="styles.css" type="text/css" rel="stylesheet" />
+        <link href="style.css" type="text/css" rel="stylesheet" />
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzAMBl8WEWkqExNw16kEk40gCOonhMUmw" async defer></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
         <script type="text/javascript">
             // convert location data from php to javascript using JSON
             var locations = jQuery.parseJSON('<?php echo str_replace("'", "\'", json_encode($locations)) ?>');
-
-            function initMap() {
-                // Create a map object and specify the DOM element for display.
-                var map = new google.maps.Map(document.getElementById('map'), {
-                    animation: google.maps.Animation.DROP,
-                    center: {lat: parseFloat(locations[0].latitude), lng: parseFloat(locations[0].longitude)},
-                    scrollwheel: false,
-                    zoom: 14
-                });
-
-                $(locations).each(function() {
-                    var marker = new google.maps.Marker({
-                        map: map,
-                        position: {lat: parseFloat(this.latitude), lng: parseFloat(this.longitude)},
-                        address: this.mailing_address
-                    });
-
-                    marker.addListener("click", function() {
-                        alert(this.address); // FRONTEND:10 change the map marker click listener to trigger location popup
-                    })
-                })
-            }
-
-        </script>
-        <!-- autoscroll to contact -->
-        <?php if (isset($_GET["contact"])) { ?>
-            <script type="text/javascript">
-                jQuery(document).ready(function($) {
-                    setTimeout(function() {
-                        $("html, body").animate({scrollTop: $("#contact").offset().top}, 650);
-                    }, 750);
-                });
-            </script>
-        <?php } ?>
-
-        <!-- scroll on click to contact -->
-        <script type="text/javascript">
-            jQuery(document).ready(function($) {
-                $("#nav a.contact").click(function(e) {
-                    e.preventDefault();
-                    $("html, body").animate({scrollTop: $("#contact").offset().top}, 650);
-                })
-
-                $("#see-how").click(function() {
-                    $("html, body").animate({scrollTop: $("#how").offset().top}, 650);
-                })
-            });
         </script>
 
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $("li.tablink").click(function() {
-                    if (!$(this).hasClass("active")) {
-                        // handle nav change
-                        $("li.tablink").removeClass("active");
-                        $(this).addClass("active");
-
-                        // handle content change
-                        $(".tabcontent").removeClass("active");
-                        $(".tabcontent[data-tab=" + $(this).data("target") + "]").addClass("active");
-                    }
-                })
-            })
-       </script>
+        <script src="scripts.js" type="text/javascript"></script>
     </head>
-    <body onload="initMap()">
-
-        <?php
-            // FRONTEND: remove this garbage style tag and externalize this stylesheet. This is just so I could see what I was doing
-        ?>
-    </head>
-    <body>
+    <body onload="initMap(); openNav();">
         <div id="nav">
             <div class="nav-inner width">
                 <a href="../home">
@@ -126,12 +60,21 @@
                         <a href="../locations"><li>Locations</li></a>
                         <a href="../ideas"><li>Ideas</li></a>
                         <a href="../projects"><li>Projects</li></a>
-                        <a class="contact" href="../home?contact"><li>Contact</li></a>
+                        <a href="../contact"><li>Contact</li></a>
                     </ul>
                 </div>
             </div>
         </div>
         <div id="mapContainer">
+            <div id="mySidenav" class="sidenav">
+                <div class="sidebar-tools">
+
+                </div>
+                <div id="sideIdea" class="side-button">I Have an Idea</div>
+                <div id="sideLocation" class="side-button">I Have a Location</div>
+                <div id="sideHelp" class="side-button">I Want to Contribute</div>
+                <div id="sideContact" class="side-button">Contact Us</div>
+            </div>
             <div id="map"></div>
             <div id="welcome">
                 <div class="width">
@@ -152,7 +95,7 @@
                     foreach($locations as $l) { ?>
                         <div class="location">
                             <div class="btn-group">
-                                <div class="btn newidea"><a href="../newidea?location=<?php echo $l["id"] ?>">I have an idea</a></div>
+                                <div class="btn newidea"><a href="../ideas/new?location=<?php echo $l["id"] ?>">I have an idea</a></div>
                                 <?php if ($l["ideas"] > 0) { ?> <div class="btn seeideas"><a href="../ideas?location=<?php echo $l["id"] ?>">See other ideas here</a></div> <?php } ?>
                                 <div class="btn seelocation"><a href="../locations/propertyInfo.php?id=<?php echo $l["id"] ?>">View full location</a></div>
                             </div>
@@ -179,15 +122,38 @@
                     ?>
                 </div>
                 <div id="projects" class="tabcontent" data-tab="2">
-                    <?php
-                    foreach ($projects as $p) { ?>
-                        <div class="project">
-                            <div class="project_image" style="background-image: url(../helpers/location_images/<?php if (isset($p['image'])) echo $p['image']; else echo "no_image.png";?>);"></div>
-                            <div class="project_leader"><?php echo $p["leader"] ?></div>
-                            <div class="address"><?php echo $p["address"] ?></div>
-                            <div class="project_status">Status: <?php echo $p["completed"] == 0 ? "unfinished" : "finished" ?></div>
-                        </div>
-                    <?php } ?>
+                    <!-- <div id="ideas" class="tabcontent active" data-tab="2"> -->
+                   <?php
+                   foreach($ideas as $i) { ?>
+                       <div class="idea">
+                           <div class="btn-group">
+                               <div class="btn newidea"><a href="../newidea?location=<?php echo $l["id"] ?>">I have a similar idea</a></div>
+                               <?php if ($i["ideas"] > 0) { ?> <div class="btn seeideas"><a href="../ideas?location=<?php echo $i["id"] ?>">See other ideas nearby</a></div> <?php } ?>
+                               <div class="btn seelocation"><a href="../locations/propertyInfo.php?id=<?php echo $i["id"] ?>">View full location</a></div>
+                           </div>
+                           <div class="idea_image" style="background-image: url(../helpers/location_images/<?php if (isset($i['image'])) echo $i['image']; else echo "no_image.jpg";?>);">
+                               <?php if ($l["ideas"] > 0) { ?>
+                                   <div class="ideas_count"><?php echo $i["ideas"] ?></div>
+                               <?php } ?>
+                           </div>
+                           <div class="idea_desc">
+                               <div class="idea_leader"><?php echo $i["leader"] ?></div>
+                               <div class="address"><?php echo $i["address"] ?></div>
+                  <div class="idea_status">Status: <?php echo $i["completed"] == 0 ? "unfinished" : "finished" ?></div>
+                               <?php if (isset($i["features"])) { ?>
+                                   <div class="features">
+                                       <span>Features:</span>
+                                           <ul>
+                                               <?php foreach ($i["features"] as $f) { ?>
+                                                   <li><?php echo $f ?></li>
+                                               <?php } ?>
+                                           </ul>
+                                   </div>
+                               <?php } ?>
+                           </div>
+                       </div>
+                   <?php }
+                   ?>
                 </div>
             </div>
         </div>
@@ -216,19 +182,6 @@
                 		<td>The idea becomes a project, and the project is implemented by everyone who pledged to contribute his or her time and skills to turn a vacant location into a useful space for the community.</td>
                 	</tr>
                 </table>
-            </div>
-        </div>
-        <div id="contact">
-          <div class="width">
-            <div id="contact_name">CONTACT US</div>
-				        <div id="form">
-                  <form action="#"> <!--BACKEND: Edit this action to wherever the form will submit to -->
-                    <input type="text" name="name" class="form-size" placeholder="Name"><br>
-                    <input type="text" name="email" class="form-size" placeholder="Email"><br>
-                    <textarea type="text" name="message" class="message" placeholder="Message"></textarea><br>
-                    <input type="submit" id="submit" class="form-size" value="SUBMIT">
-                  </form>
-                </div>
             </div>
         </div>
         <div id="footer">

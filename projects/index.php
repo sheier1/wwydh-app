@@ -171,7 +171,7 @@ echo "<table width=1>";
 							<a href="../locations"><li>Locations</li></a>
 							<a href="../ideas"><li>Ideas</li></a>
 							<a href="../projects" class="active"><li>Projects</li></a>
-							<a href="../home?contact"><li>Contact</li></a>
+							<a href="../contact"><li>Contact</li></a>
 						</ul>
 					</div>
 				</div>

@@ -16,11 +16,17 @@
 	$offset = $itemCount * ($page - 1);
 
 	// BACKEND: change locations search code to prepared statements to prevent SQL injection
-	if ($_GET["isSearch"]) {
+	if (isset($_GET["isSearch"])) {
 		$theQuery = "SELECT * FROM `locations` WHERE `building_address` LIKE '%{$_GET["sAddress"]}%' AND `building_address` LIKE '%{$_GET["sAddress"]}%' AND `block` LIKE '%{$_GET["sBlock"]}%' AND `lot` LIKE '%{$_GET["sLot"]}%' AND `zip_code` LIKE '%{$_GET["sZip"]}%' AND `city` LIKE '%{$_GET["sCity"]}%' AND `neighborhood` LIKE '%{$_GET["sNeighborhood"]}%' AND `police_district` LIKE '%{$_GET["sPoliceDistrict"]}%' AND `council_district` LIKE '%{$_GET["sCouncilDistrict"]}%' AND `longitude` LIKE '%{$_GET["sLongitude"]}%' AND `latitude` LIKE '%{$_GET["sLatitude"]}%' AND `owner` LIKE '%{$_GET["sOwner"]}%' AND `use` LIKE '%{$_GET["sUse"]}%' AND `mailing_address` LIKE '%{$_GET["sMailingAddr"]}%'";
+	} else if (isset($_GET["location"])) {
+		$q = $conn->prepare("SELECT u.name AS `name`, i.*, GROUP_CONCAT(cc.description SEPARATOR '[-]') as `checklist`, l.mailing_address, l.image FROM ideas i LEFT JOIN users u ON u.id = i.leader_id
+		LEFT JOIN locations l ON i.location_id = l.id
+		LEFT JOIN checklists c ON c.idea_id = i.id
+		LEFT JOIN checklist_items cc ON cc.checklist_id = c.id
+		WHERE cc.contributer_id IS NULL AND i.location_id = {$_GET["location"]} GROUP BY i.id");
 	} else {
 		$q = $conn->prepare("SELECT u.name AS `name`, i.*, GROUP_CONCAT(cc.description SEPARATOR '[-]') as `checklist`, l.mailing_address, l.image FROM ideas i LEFT JOIN  users u ON u.id = i.leader_id LEFT JOIN locations l ON i.location_id = l.id LEFT JOIN checklists c ON
-		c.idea_id = i.id LEFT JOIN checklist_items cc ON cc.checklist_id = c.id WHERE cc.contributer_id IS NULL GROUP BY i.id");
+		c.idea_id = i.id LEFT JOIN checklist_items cc ON cc.checklist_id = c.id WHERE cc.contributer_id IS NULL GROUP BY i.id LIMIT $itemCount OFFSET $offset");
 	}
 
 	$q->execute();
@@ -55,7 +61,7 @@
 							<a href="../locations"><li>Locations</li></a>
 							<a href="../ideas" class="active"><li>Ideas</li></a>
 							<a href="../projects"><li>Projects</li></a>
-							<a href="../home?contact"><li>Contact</li></a>
+							<a href="../contact"><li>Contact</li></a>
 						</ul>
 					</div>
 				</div>
@@ -79,10 +85,10 @@
 					<div class="grid-item width">
 						<div class="vote">
 							<div class="upvote">
-								<i class="fa fa-caret-up" aria-hidden="true"></i>
+								<i class="fa fa-thumbs-up" aria-hidden="true"></i>
 							</div>
 							<div class="downvote">
-								<i class="fa fa-caret-down" aria-hidden="true"></i>
+								<i class="fa fa-thumbs-down" aria-hidden="true"></i>
 							</div>
 						</div>
 						<div class="idea_image" style="background-image: url(../helpers/location_images/<?php if (isset($row['image'])) echo $row['image']; else echo "no_image.jpg";?>);"></div>
@@ -112,8 +118,14 @@
 		<div id="pagination">
 			<div class="grid-inner">
 				<ul>
-				<?php for ($i = 1; $i <= ceil($total / $itemCount); $i++) { ?>
-					<li><a href="?page=<?php echo $i ?>"><?php echo $i ?></a></li>
+				<?php
+					$starting_page = ($page - 5 > 0) ? $page - 5 : 1;
+					$ending_page = ($page + 5 < ceil($total / $itemCount)) ? $page + 5 : ceil($total / $itemCount);
+
+					for ($i = 0; $i <= 10 && $starting_page + $i <= $ending_page; $i++) { ?>
+						<li><a <?php echo ($page == $starting_page + $i) ? 'class="active"' : "" ?>
+							href="?page=<?php echo $starting_page + $i ?>"><?php echo $starting_page + $i ?></a>
+						</li>
 				<?php } ?>
 				</ul>
 			</div>

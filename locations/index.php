@@ -133,7 +133,7 @@ echo "<table width=1>";
 	$offset = $itemCount * ($page - 1);
 
 	// BACKEND: change locations search code to prepared statements to prevent SQL injection
-	if ($_GET["isSearch"]) {
+	if (isset($_GET["isSearch"])) {
 		$theQuery = "SELECT * FROM `locations` WHERE `building_address` LIKE '%{$_GET["sAddress"]}%' AND `building_address` LIKE '%{$_GET["sAddress"]}%' AND `block` LIKE '%{$_GET["sBlock"]}%' AND `lot` LIKE '%{$_GET["sLot"]}%' AND `zip_code` LIKE '%{$_GET["sZip"]}%' AND `city` LIKE '%{$_GET["sCity"]}%' AND `neighborhood` LIKE '%{$_GET["sNeighborhood"]}%' AND `police_district` LIKE '%{$_GET["sPoliceDistrict"]}%' AND `council_district` LIKE '%{$_GET["sCouncilDistrict"]}%' AND `longitude` LIKE '%{$_GET["sLongitude"]}%' AND `latitude` LIKE '%{$_GET["sLatitude"]}%' AND `owner` LIKE '%{$_GET["sOwner"]}%' AND `use` LIKE '%{$_GET["sUse"]}%' AND `mailing_address` LIKE '%{$_GET["sMailingAddr"]}%'";
 	} else {
 		$q = $conn->prepare("SELECT l.*, COUNT(DISTINCT i.id) AS ideas, GROUP_CONCAT(DISTINCT f.feature SEPARATOR '[-]') AS features FROM locations l LEFT JOIN ideas i ON i.location_id = l.id LEFT JOIN location_features f ON f.location_id = l.id GROUP BY l.id ORDER BY ideas DESC LIMIT $itemCount OFFSET $offset");
@@ -171,7 +171,7 @@ echo "<table width=1>";
 							<a href="../locations" class="active"><li>Locations</li></a>
 							<a href="../ideas"><li>Ideas</li></a>
 							<a href="../projects"><li>Projects</li></a>
-							<a href="../home?contact"><li>Contact</li></a>
+							<a href="../contact"><li>Contact</li></a>
 						</ul>
 					</div>
 				</div>
@@ -212,8 +212,14 @@ echo "<table width=1>";
 		<div id="pagination">
 			<div class="grid-inner">
 				<ul>
-				<?php for ($i = 1; $i <= ceil($total / $itemCount) && $i < $page + 10; $i++) { ?>
-					<li><a href="?page=<?php echo $i ?>"><?php echo $i ?></a></li>
+				<?php
+					$starting_page = ($page - 5 > 0) ? $page - 5 : 1;
+					$ending_page = ($page + 5 < ceil($total / $itemCount)) ? $page + 5 : ceil($total / $itemCount);
+
+					for ($i = 0; $i <= 10 && $starting_page + $i <= $ending_page; $i++) { ?>
+						<li><a <?php echo ($page == $starting_page + $i) ? 'class="active"' : "" ?>
+							href="?page=<?php echo $starting_page + $i ?>"><?php echo $starting_page + $i ?></a>
+						</li>
 				<?php } ?>
 				</ul>
 			</div>
